@@ -1,10 +1,11 @@
-
+import { BackgroundForm } from "../../Components/forms/background";
 
 function Formulario(){
     return(
-        <>
-        <h1>Formulario em desenvolvimento</h1>
-        </>
+        <div>
+            <BackgroundForm />
+        </div>
+
     )
 }
 
