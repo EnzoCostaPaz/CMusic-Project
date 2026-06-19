@@ -1,0 +1,31 @@
+import styles from './How_works.module.css';
+import FundoImage from '../../assets/Asset_fundo_Works.png';
+import { useInView } from 'react-intersection-observer';
+
+function How_works() {
+
+    const { ref, inView } = useInView({
+        triggerOnce: true,
+        threshold: 0.3,
+    });
+
+    return (
+        <>
+            {/* CORREÇÃO 1: Removido o espaço do url() e ajustado para o fundo cobrir a tela */}
+            <div className={styles.ImagemFundo} style={{ backgroundImage: `url(${FundoImage})` }}>
+                
+                <div className={styles.Title}>
+                    <h2>Como Funciona o CMusic?</h2>
+                </div>
+
+                {/* CORREÇÃO 2: A div com a referência da animação */}
+                <div ref={ref} className={`${styles.ImageAsset} ${inView ? styles.isVisible : ''}`}>
+                    <img src="./imgs/Asset_Works.svg" alt="Caminho de como funciona o formulário" />
+                </div>
+                
+            </div>
+        </>
+    )
+}
+
+export { How_works }

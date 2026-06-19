@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
+
+.Footer {
+    background-color: #181627;
+    margin-top: 130px;
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+    padding-top: 40px; 
+}
+
+.Container {
+    padding: 0 8%; 
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.TopSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap; 
+    gap: 40px;
+}
+
+.left {
+    max-width: 400px;
+}
+
+.Phrase {
+    font-family: 'Afacad';
+    color: #FFFFFF;
+    font-size: 20px; 
+    font-weight: 400;
+    margin-top: 60px;
+}
+
+.colunasContent {
+    display: flex;
+    gap: 60px; 
+}
+
+.titulo {
+    font-family: 'Afacad';
+    font-size: 20px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0 0 15px 0; 
+}
+
+.lista {
+    padding: 0; 
+    margin: 0;
+}
+
+.lista li {
+    list-style-type: none;
+    margin-bottom: 12px; 
+}
+
+.lista a {
+    color: #FFFFFF;
+    font-family: 'Alexandria';
+    font-size: 16px;
+    font-weight: 200;
+    text-decoration: none;
+    transition: color 0.3s ease; 
+}
+
+.lista a:hover {
+    color: #501A5E;
+}
+
+.Linha {
+    border-top: 1px solid #FFFFFF; 
+    width: 100%;
+    margin: 40px 0 20px 0;
+}
+
+.ContentIcones {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 30px; 
+}
+
+.Icon {
+    font-size: 30px; 
+    color: #FFFFFF;
+    transition: all 0.3s ease; 
+    cursor: pointer;
+}
+
+.Icon:hover {
+    color: #501A5E; 
+    transform: scale(1.1); 
+}
+
+.CopyrightDiv {
+    background-color: #14121F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; 
+    padding: 20px 0;
+    margin-top: auto; 
+}
+
+.TextCopryRight {
+    font-family: 'Afacad';
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+}
