@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
+
+.FormContainer {
+    width: 100%;
+    /* Mudei para flex para facilitar a centralização da "caixa" do formulário */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+    /* Um respiro em cima e embaixo */
+}
+
+/* Esta é a "caixa" principal que junta o lado esquerdo e direito */
+.FormContent {
+    display: flex;
+    /* Aqui definimos a largura total da caixa do formulário (soma dos dois lados) */
+    width: 1040px;
+    /* 520px + 520px */
+    height: 550px;
+    /* Aumentei um pouco a altura para acomodar bem o conteúdo */
+    /* Adicionei uma leve sombra para dar profundidade (opcional) */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
+    /* Arredonda as bordas extremas da caixa inteira */
+}
+
+/* --- LADO ESQUERDO --- */
+.LeftSide {
+    width: 50%;
+    height: 100%;
+    background-color: #2D1E36;
+    /* Removemos as bordas individuais, a FormContent já está arredondando os cantos! */
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+
+    /* Organizando o conteúdo: Título em cima, imagem embaixo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.LeftSide h1 {
+    font-size: 22px;
+    color: #fff;
+    font-family: 'Source Code Pro', monospace;
+    text-align: center;
+    margin-bottom: 30px;
+    /* Espaço entre o título e a imagem */
+}
+
+.ImgAstronauta {
+    max-width: 80%;
+    /* Garante que a imagem caiba bem no lado esquerdo */
+    height: auto;
+}
+
+/* --- LADO DIREITO --- */
+.RightSide {
+    width: 50%;
+    height: 100%;
+    background-color: #1E1C2F;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 60px;
+    /* Respiro interno generoso para o conteúdo do formulário */
+    box-sizing: border-box;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.Form h1 {
+    font-family: 'Source Code Pro', monospace;
+    color: #fff;
+    font-weight: 700;
+    font-size: 28px;
+    /* Aumentei o título "Primeiramente" */
+    margin: 0 0 10px 0;
+}
+
+.Form p {
+    font-family: 'Source Code Pro', monospace;
+    color: #fff;
+    font-size: 18px;
+    margin: 0 0 30px 0;
+    /* Espaço entre o subtítulo e os radios */
+}
+
+/* --- ESTILIZAÇÃO DOS INPUTS (RADIO E CHECKBOX) --- */
+.RadioGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Espaço vertical entre as opções */
+    margin-bottom: 40px;
+    /* Espaço antes dos botões */
+}
+
+.RadioGroup label {
+    font-family: 'Alexandria', sans-serif;
+    color: #fff;
+    font-weight: 300;
+    font-size: 16px;
+    /* Aumentei a fonte (antes estava 8px, muito pequeno!) */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Espaço entre a bolinha e o texto */
+    cursor: pointer;
+}
+
+/* Dá um destaque no hover da label */
+.RadioGroup label:hover {
+    color: #a87ebb;
+    /* Um tom de roxo mais claro */
+}
+
+/* Customização básica do Radio/Checkbox (Avançado: pode precisar de -webkit-appearance depois) */
+.RadioGroup input[type="radio"],
+.RadioGroup input[type="checkbox"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    accent-color: #501A5E;
+    /* Colore a bolinha de roxo quando selecionada! */
+}
+
+.CheckboxGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Cria exatamente 3 colunas iguais */
+    gap: 20px 15px;
+    /* Espaço entre as linhas e entre as colunas */
+    margin-bottom: 40px;
+}
+
+.CheckboxGrid label {
+    font-family: 'Alexandria', sans-serif;
+    color: #fff;
+    font-weight: 300;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* Espaço entre a caixa e o texto */
+    cursor: pointer;
+}
+
+/* Dá um destaque sutil no texto ao passar o mouse */
+.CheckboxGrid label:hover {
+    color: #a87ebb;
+}
+
+/* --- ESTILIZANDO A CAIXA DO CHECKBOX --- */
+.CheckboxGrid input[type="checkbox"] {
+    /* O appearance: none é o que "mata" o visual padrão do navegador */
+    appearance: none;
+    -webkit-appearance: none;
+
+    /* Desenhando a sua caixa */
+    width: 22px;
+    height: 22px;
+    border: 2px solid #501A5E;
+    /* A borda roxa escura do seu design */
+    border-radius: 4px;
+    /* Uma leve arredondada nas pontas */
+    background-color: transparent;
+    /* Fundo transparente inicialmente */
+    cursor: pointer;
+    position: relative;
+
+    /* Prepara para centralizar o ícone de 'check' depois */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+    margin: 0;
+}
+
+/* O QUE ACONTECE QUANDO É MARCADO */
+.CheckboxGrid input[type="checkbox"]:checked {
+    background-color: #501A5E;
+    /* Fundo fica roxo */
+}
+
+/* Desenhando o sinal de "Certo" (Checkmark) usando CSS puro */
+.CheckboxGrid input[type="checkbox"]:checked::after {
+    content: '✓';
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* --- BOTÕES --- */
+.ButtonGroup {
+    display: flex;
+    flex-direction: column;
+    /* Coloca os botões um embaixo do outro, como no seu protótipo */
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Como você usou nomes de classes diferentes no CSS e no TSX, criei uma classe genérica para todos os botões do form */
+.ButtonGroup button {
+    background-color: #2D1E36;
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: 'Afacad', sans-serif;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 150px;
+    /* Largura padrão para manter organizado */
+}
+
+.ButtonGroup button:hover {
+    background-color: #501A5E;
+    /* Fica roxo mais forte no hover */
+}
+
+/* O botão de "Sair" é menor no seu protótipo */
+.ButtonGroup .LeaveButton {
+    background-color: transparent;
+    /* Fundo transparente */
+    border: 1px solid #2D1E36;
+    /* Só a bordinha */
+    width: 100px;
+}
+
+.ButtonGroup .LeaveButton:hover {
+    background-color: #2D1E36;
+}
+
+.CheckboxGridTwoCols {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Cria 2 colunas iguais */
+    gap: 20px 15px;
+    margin-bottom: 40px;
+}
+
+/* Faz a última opção ocupar as duas colunas */
+.SpanTwo {
+    grid-column: span 2;
+}
+
+/* Compartilhando as fontes e alinhamentos do grid de 3 colunas */
+.CheckboxGridTwoCols label {
+    font-family: 'Alexandria', sans-serif;
+    color: #fff;
+    font-weight: 300;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.CheckboxGridTwoCols label:hover {
+    color: #a87ebb;
+}
+
+/* REAPROVEITANDO A ESTILIZAÇÃO DA CAIXA!
+  Aqui nós dizemos ao CSS: "Aplique este visual tanto na grade de 3 colunas quanto na de 2 colunas"
+*/
+.CheckboxGrid input[type="checkbox"],
+.CheckboxGridTwoCols input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #501A5E;
+    border-radius: 4px;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+    margin: 0;
+}
+
+.CheckboxGrid input[type="checkbox"]:checked,
+.CheckboxGridTwoCols input[type="checkbox"]:checked {
+    background-color: #501A5E;
+}
+
+.CheckboxGrid input[type="checkbox"]:checked::after,
+.CheckboxGridTwoCols input[type="checkbox"]:checked::after {
+    content: '✓';
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
