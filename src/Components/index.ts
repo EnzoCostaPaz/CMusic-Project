@@ -1,5 +1,6 @@
-export * from './banner';
-export * from './about';
-export * from './objectives';
-export * from './how_works';
-export * from './Footer';
+export * from './home/banner';
+export * from './home/about';
+export * from './home/objectives';
+export * from './home/how_works';
+export * from './home/Footer';
+

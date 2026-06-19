@@ -38,8 +38,12 @@ function Footer() {
                 <hr className={styles.Linha}></hr>
 
                 <div className={styles.ContentIcones}>
-                    <FaLinkedinIn className={styles.Icon} />
-                    <FaGithub className={styles.Icon} />
+                    <a href="https://www.linkedin.com/in/enzo-costa-paz-7b5a9b21b/" target="_blank" rel="noopener noreferrer">
+                        <FaLinkedinIn className={styles.Icon} />
+                    </a>
+                    <a href="https://github.com/EnzoCostaPaz" target="_blank" rel="noopener noreferrer">
+                        <FaGithub className={styles.Icon} />
+                    </a>
                 </div>
             </div>
 

@@ -1,7 +1,10 @@
 import styles from './banner.module.css';
-import Banner_Degrade from '../../assets/Banner_Degrade.png';
+import { useNavigate } from 'react-router-dom';
+import Banner_Degrade from '../../../assets/Banner_Degrade.png';
 
 function Banner() {
+    const navigate = useNavigate();
+
     return (
         <div className={styles.ImagemBanner} style={{ backgroundImage: `url(${Banner_Degrade})` }}>
             
@@ -9,12 +12,16 @@ function Banner() {
                 <div className={styles.HeaderLeft}></div>
                 
                 <nav className={styles.NavLinks}>
-                    <button>Sobre</button>
-                    <button>Github</button>
+                    <button onClick={() => navigate('')}>Sobre</button>
+                    <a href="https://github.com/EnzoCostaPaz/CMusic-Project" target="_blank" rel="noopener noreferrer">
+                        <button>Github</button>
+                    </a>
                 </nav>
 
                 <div className={styles.HeaderRight}>
-                    <button className={styles.ButtonUtilizar}>Utilizar</button>
+                    <button className={styles.ButtonUtilizar} onClick={() => navigate('/formulario')}>
+                        Utilizar
+                    </button>
                 </div>
             </header>
 

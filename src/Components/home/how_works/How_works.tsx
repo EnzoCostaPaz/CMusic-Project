@@ -1,5 +1,5 @@
 import styles from './How_works.module.css';
-import FundoImage from '../../assets/Asset_fundo_Works.png';
+import FundoImage from '../../../assets/Asset_fundo_Works.png';
 import { useInView } from 'react-intersection-observer';
 
 function How_works() {
@@ -18,9 +18,8 @@ function How_works() {
                     <h2>Como Funciona o CMusic?</h2>
                 </div>
 
-                {/* CORREÇÃO 2: A div com a referência da animação */}
                 <div ref={ref} className={`${styles.ImageAsset} ${inView ? styles.isVisible : ''}`}>
-                    <img src="./imgs/Asset_Works.svg" alt="Caminho de como funciona o formulário" />
+                    <img src="../imgs/Asset_Works.svg" alt="Caminho de como funciona o formulário" />
                 </div>
                 
             </div>
