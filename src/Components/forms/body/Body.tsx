@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { getSpotifyToken } from '../../../service/spotifyAuth';
+import { getRecommendations } from '../../../service/spotifyService';
 
 import styles from './Body.module.css';
 
@@ -107,11 +109,24 @@ function Body() {
     };
 
     // Função para lidar com o envio final
-    const submitForm = (e: React.FormEvent) => {
+    const submitForm = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Dados do formulário prontas para a API:", formData);
-        //API resultado
 
+        const token = await getSpotifyToken();
+
+        if (token) {
+            const tracks = await getRecommendations(token, formData);
+
+            if (tracks && tracks.length > 0) {
+                console.log("Músicas encontradas com sucesso!", tracks);
+
+                navigate('/resultado', { state: { tracks: tracks } });
+            } else {
+                console.log("A API não encontrou músicas com essa combinação exata.");
+            }
+        } else {
+            console.log("Falha ao obter o token do Spotify.");
+        }
     };
 
 

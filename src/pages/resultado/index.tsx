@@ -1,8 +1,12 @@
+import { BackgroundForm  } from "../../Components"
+import { Result } from "../../Components"
 function Resultado(){
     return(
-        <>
-        <h1>Resultado do formulario</h1>
-        </>
+        <div>
+            <BackgroundForm>
+               <Result/> 
+            </BackgroundForm>
+        </div>
     )
 }
 

@@ -6,3 +6,5 @@ export * from './home/Footer';
 
 export * from './forms/background';
 export * from './forms/body';
+
+export * from './result';

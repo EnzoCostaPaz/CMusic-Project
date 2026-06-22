@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
+
+/* Container mestre ocupando o espaço e centralizando tudo */
+.ResultContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 75vh;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+/* Frase do topo */
+.phrase {
+    font-family: 'Source Code Pro', monospace;
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 400px;
+    line-height: 1.4;
+}
+
+.ResultGrid {
+    background-color: #2D1E36;
+    border-radius: 25px;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 420px;
+    height: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    margin-bottom: 40px;
+}
+
+.PhotoAlbum {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px; 
+}
+
+.Image {
+    width: 220px; 
+    height: 220px;
+    object-fit: cover; 
+    border-radius: 15px; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 6px solid #501A51;
+}
+
+.NameRecomendatin h2 {
+    font-family: 'Afacad', sans-serif;
+    color: #FFFFFF;
+    font-size: 26px;
+    font-weight: 700;
+    font-style: italic; 
+    margin: 0 0 5px 0;
+    text-align: center;
+}
+
+.Authors p {
+    font-family: 'Alexandria', sans-serif;
+    color: #b3b3b3;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0 0 25px 0; /* Esse é o respiro que empurra o botão para baixo */
+    text-align: center;
+}
+
+.GroupButtonResultGird {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.GoToSpotify {
+    background-color: #501A51;
+    color: #FFFFFF;
+    font-family: 'Afacad', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 0;
+    width: 80%;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.GoToSpotify:hover {
+    background-color: #3E0866;
+    transform: scale(1.05);
+}
+
+.GroupButtonResultContainer {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.TryAgainButton,
+.GoBackButton {
+    background-color: #501A51;
+    color: #FFFFFF;
+    font-family: 'Afacad', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.TryAgainButton:hover,
+.GoBackButton:hover {
+    background-color: #3E0866;
+}
