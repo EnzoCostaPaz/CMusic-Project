@@ -4,10 +4,12 @@
 
 .FormContainer {
     width: 100%;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 0;
+    padding: 40px 20px;
+    box-sizing: border-box;
 }
 
 .FormContent {
@@ -319,4 +321,62 @@
     color: white;
     font-size: 16px;
     font-weight: bold;
+}
+
+@media (max-width: 1200px) {
+    .FormContent {
+        width: 90%; 
+        max-width: 1040px; 
+    }
+
+    .RightSide {
+        padding: 40px 40px;
+    }
+}
+
+/* celulares */ 
+@media (max-width: 850px) {
+    .FormContent {
+        flex-direction: column; 
+        height: auto;
+    }
+
+    .LeftSide {
+        width: 100%;
+        height: auto;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+        border-bottom-left-radius: 0; 
+        padding: 30px 20px;
+    }
+
+    .ImgAstronauta {
+        max-width: 150px; 
+    }
+
+    .RightSide {
+        width: 100%;
+        height: auto;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+        border-top-right-radius: 0; 
+        padding: 30px 20px;
+    }
+
+    .Form p {
+        width: 100%; 
+        font-size: 16px;
+    }
+
+    .StepParts {
+        justify-content: center; 
+    }
+
+    .connectLine {
+        width: 40px;
+    }
+
+    .CheckboxGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
