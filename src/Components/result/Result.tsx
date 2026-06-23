@@ -1,27 +1,62 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom'; // Importamos o useLocation
 import styles from './Result.module.css';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, time } from 'framer-motion';
 
 
 function Result() {
     const navigate = useNavigate();
     const location = useLocation(); // Inicia o "leitor de bagagem"
 
+    const [loading, setLoading] = useState(true); // tela de carregamento
+
+
     const resultData = location.state?.tracks;
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false)
+        }, 3000);
+
+        return () => clearTimeout(timer)
+    }, []);
+
+    if (loading) {
+        return (
+            <motion.div
+                className={styles.loadingContainer}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+            >
+                <div className={styles.spinner}></div>
+                    <p className={styles.phrase}>Buscando sua recomendação perfeita...</p>
+               
+            </motion.div>
+        )
+    }
     if (!resultData || resultData.length === 0) {
         return (
-            <div className={styles.ResultContainer}>
-                <p className={styles.phrase}>Ops! Não conseguimos encontrar o que você buscava.</p>
-                <div className={styles.GroupButtonResultContainer}>
-                    <button className={styles.GoBackButton} onClick={() => navigate('/')}>
-                        Voltar para o começo
-                    </button>
+
+            <motion.div
+                className={styles.loadingContainer}
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                exit={{opacity: 0}}
+            >
+                <div className={styles.ResultContainer}>
+                    <p className={styles.phrase}>Ops! Não conseguimos encontrar o que você buscava.</p>
+                    <div className={styles.GroupButtonResultContainer}>
+                        <button className={styles.GoBackButton} onClick={() => navigate('/')}>
+                            Voltar para o começo
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </motion.div>
         );
     }
+
+
 
     const item = resultData[0];
 

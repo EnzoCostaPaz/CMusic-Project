@@ -32,57 +32,66 @@ const searchTypeMap: Record<string, "track" | "album" | "artist"> = {
 // Função principal que fará o pedido das músicas
 export const getRecommendations = async (token: string, formData: any) => {
     try {
-        // Define o que buscar (música, álbum ou artista)
         const searchType = searchTypeMap[formData.Type] || "track";
 
-        // Traduz os gêneros escolhidos (ignorando "Surpresa")
         const genres: string[] = (formData.GenreType || [])
             .filter((g: string) => g !== "Surpresa")
             .map((g: string) => genreMap[g] || g.toLowerCase());
 
-        // Traduz os sentimentos em palavras de humor (ignorando "Destino")
         const moods: string[] = (formData.FellinType || [])
             .filter((f: string) => f !== "Destino")
             .map((f: string) => moodMap[f])
             .filter(Boolean);
 
-        const queryParts: string[] = [];
-
-        if (genres.length > 0) {
-           
-            if (searchType === "album") {
-                queryParts.push(genres[0]);
-            } else {
-                queryParts.push(`genre:"${genres[0]}"`);
-            }
-        }
-        queryParts.push(...moods);
-
-        let q = queryParts.join(" ").trim();
-
-        if (!q) {
-            const fallback = ["pop", "rock", "indie", "jazz", "mpb"];
-            const random = fallback[Math.floor(Math.random() * fallback.length)];
-            q = searchType === "album" ? random : `genre:"${random}"`;
-        }
-
         const spotifySearchURL = "https://" + "api.spotify.com" + "/v1/search";
 
-        // GET na API de Busca do Spotify
-        const response = await axios.get(spotifySearchURL, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            },
-            params: {
-                q,
-                type: searchType,
-                market: "BR", // mercado brasileiro (gêneros como sertanejo/funk)
-                limit: 3
-            }
-        });
+      
+        const searchSpotify = async (queryToSearch: string) => {
+            const response = await axios.get(spotifySearchURL, {
+                headers: { Authorization: `Bearer ${token}` },
+                params: {
+                    q: queryToSearch,
+                    type: searchType,
+                    market: "BR",
+                    limit: 1 
+                }
+            });
+            const itemsKey = `${searchType}s` as "tracks" | "albums" | "artists";
+            return response.data[itemsKey]?.items ?? [];
+        };
 
-        const itemsKey = `${searchType}s` as "tracks" | "albums" | "artists";
-        return response.data[itemsKey]?.items ?? [];
+        // fallback
+        let items: any[] = [];
+
+        // plano a: Busca de Genero + sentimento
+        const queryParts: string[] = [];
+        if (genres.length > 0) {
+            queryParts.push(searchType === "album" ? genres[0] : `genre:"${genres[0]}"`);
+        }
+        queryParts.push(...moods);
+        let qExact = queryParts.join(" ").trim();
+
+        if (qExact) {
+            items = await searchSpotify(qExact);
+        }
+
+        // plano b: busca de apenas o genero
+        if (items.length === 0 && genres.length > 0) {
+            console.log("Plano A falhou. Tentando o Plano B (Apenas Gênero)...");
+            let qGenreOnly = searchType === "album" ? genres[0] : `genre:"${genres[0]}"`;
+            items = await searchSpotify(qGenreOnly);
+        }
+
+        // plano c: manda um curinga
+        if (items.length === 0) {
+            console.log("Plano B falhou. Acionando Plano C (Gênero Curinga)...");
+            const fallback = ["pop", "rock", "indie", "jazz", "mpb"];
+            const random = fallback[Math.floor(Math.random() * fallback.length)];
+            let qFallback = searchType === "album" ? random : `genre:"${random}"`;
+            items = await searchSpotify(qFallback);
+        }
+
+        return items;
 
     } catch (error) {
         console.error("Erro ao buscar recomendações de músicas:", error);

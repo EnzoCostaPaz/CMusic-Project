@@ -1,6 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
 
+
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #e0e0e0;
+    border-top: 5px solid #3E0866;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.phrase{
+    font-family: 'Source Code Pro';
+    color: #FFFFFF;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* Container mestre ocupando o espaço e centralizando tudo */
 .ResultContainer {
     display: flex;
@@ -43,14 +75,14 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
 .Image {
-    width: 220px; 
+    width: 220px;
     height: 220px;
-    object-fit: cover; 
-    border-radius: 15px; 
+    object-fit: cover;
+    border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     border: 6px solid #501A51;
 }
@@ -60,7 +92,7 @@
     color: #FFFFFF;
     font-size: 26px;
     font-weight: 700;
-    font-style: italic; 
+    font-style: italic;
     margin: 0 0 5px 0;
     text-align: center;
 }
@@ -70,7 +102,8 @@
     color: #b3b3b3;
     font-size: 14px;
     font-weight: 300;
-    margin: 0 0 25px 0; /* Esse é o respiro que empurra o botão para baixo */
+    margin: 0 0 25px 0;
+    /* Esse é o respiro que empurra o botão para baixo */
     text-align: center;
 }
 
@@ -123,4 +156,10 @@
 .TryAgainButton:hover,
 .GoBackButton:hover {
     background-color: #3E0866;
+}
+
+@media (min-width: 1024px) {
+  .ResultContainer{
+    height: 90vh;
+  }
 }
