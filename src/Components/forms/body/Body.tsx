@@ -196,10 +196,38 @@ function Body() {
                         </div>
                     </div>
                 );
-            case 3:
-                return (
-                    <div>
 
+            case 3:
+
+                if (formData.Type === 'Cantor') {
+                    return (
+                        <div>
+                            <h1>Por fim...</h1>
+                            <p className={styles.PharseLastStep}>Qual estilo da sua banda ou cantor(a) você procura? </p>
+
+                            <div className={styles.CheckboxGridTwoCols}>
+                                <label>
+                                    <input type="checkbox" value="Indie" checked={formData.FellinType.includes("Indie")} onChange={handleFeelingChange} /> Indie
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="Mainstream" checked={formData.FellinType.includes("Mainstream")} onChange={handleFeelingChange} /> Mainstream
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="Experimental" checked={formData.FellinType.includes("Experimental")} onChange={handleFeelingChange} /> Experimental
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="Classico" checked={formData.FellinType.includes("Classico")} onChange={handleFeelingChange} /> Classico
+                                </label>
+                                <label className={styles.SpanTwo}>
+                                    <input type="checkbox" value="Alternativo" checked={formData.FellinType.includes("Alternativo")} onChange={handleFeelingChange} /> Alternativo
+                                </label>
+                            </div>
+                        </div>
+                    )
+                }
+                else if (formData.Type === 'Album' || formData.Type === 'Musica') {
+                    return(
+                    <div>
                         <div className={styles.t}></div>
 
                         <h1>Agora...</h1>
@@ -222,114 +250,117 @@ function Body() {
                                 <input type="checkbox" value="Destino" checked={formData.FellinType.includes("Destino")} onChange={handleFeelingChange} /> Deixe o destino escolher
                             </label>
                         </div>
-                    </div>
+                    </div >
                 );
+};
+                
+
             default:
-                return null;
+return null;
         }
     };
 
 
-    return (
-        <div className={styles.FormContainer}>
-            <div className={styles.FormContent}>
+return (
+    <div className={styles.FormContainer}>
+        <div className={styles.FormContent}>
 
-                <div className={styles.LeftSide}>
-                    <h1>Vamos começar a busca do melhor da musica para você</h1>
-                    <img src="./imgs/Asset_forms.png" alt="Constelação" className={styles.ImgAstronauta} />
-                </div>
-
-                <div className={styles.RightSide}>
-                    <AnimatePresence initial={false} custom={direction}>
-
-                        <motion.div
-                            key={step}
-                            custom={direction}
-                            variants={variants}
-                            initial="enter"
-                            animate="center"
-                            exit="exit"
-                            transition={{
-                                x: { type: 'spring', stiffness: 300, damping: 30 },
-                                opacity: { duration: 0.2 }
-                            }}
-                            style={{
-                                position: 'absolute',
-                                width: '100%',
-                                height: '100%',
-                                left: 0,
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                padding: '0 60px',
-                                boxSizing: 'border-box'
-                            }}
-                        >
-                            <form onSubmit={submitForm} className={styles.Form}>
-
-                                <div className={styles.StepParts}>
-                                    {/* Bolinha 1 */}
-                                    <div className={styles.Circles}><p>1</p></div>
-
-                                    {/* Linha 1 (Acende se step >= 2) */}
-                                    <div className={`${styles.connectLine} ${step >= 2 ? styles.connectLineActive : ''}`}></div>
-
-                                    {/* Bolinha 2 */}
-                                    <div className={styles.Circles}><p>2</p></div>
-
-                                    {/* Linha 2 (Acende se step === 3) */}
-                                    <div className={`${styles.connectLine} ${step === 3 ? styles.connectLineActive : ''}`}></div>
-
-                                    {/* Bolinha 3 */}
-                                    <div className={styles.Circles}><p>3</p></div>
-                                </div>
-
-
-                                {renderStep()}
-
-                                <div className={styles.ButtonGroup}>
-
-                                    {step < 3 && (
-                                        <button
-                                            type="button"
-                                            onClick={nextStep}
-                                            disabled={!isStepValid()} // Trava o botão se não for válido
-                                        >
-                                            Prosseguir
-                                        </button>
-                                    )}
-
-                                    {step === 3 && (
-                                        <button
-                                            type="submit"
-                                            className={styles.SendButton}
-                                            disabled={!isStepValid()} // Trava o botão de envio se não for válido
-                                        >
-                                            Enviar
-                                        </button>
-                                    )}
-
-                                    {step === 1 && (
-                                        <button type="button" className={styles.LeaveButton} onClick={() => navigate('/')}>
-                                            Sair
-                                        </button>
-                                    )}
-
-                                    {step > 1 && (
-                                        <button type="button" className={styles.GoBackButton} onClick={prevStep}>
-                                            Voltar
-                                        </button>
-                                    )}
-
-                                </div>
-                            </form>
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
-
+            <div className={styles.LeftSide}>
+                <h1>Vamos começar a busca do melhor da musica para você</h1>
+                <img src="./imgs/Asset_forms.png" alt="Constelação" className={styles.ImgAstronauta} />
             </div>
+
+            <div className={styles.RightSide}>
+                <AnimatePresence initial={false} custom={direction}>
+
+                    <motion.div
+                        key={step}
+                        custom={direction}
+                        variants={variants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={{
+                            x: { type: 'spring', stiffness: 300, damping: 30 },
+                            opacity: { duration: 0.2 }
+                        }}
+                        style={{
+                            position: 'absolute',
+                            width: '100%',
+                            height: '100%',
+                            left: 0,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            padding: '0 60px',
+                            boxSizing: 'border-box'
+                        }}
+                    >
+                        <form onSubmit={submitForm} className={styles.Form}>
+
+                            <div className={styles.StepParts}>
+                                {/* Bolinha 1 */}
+                                <div className={styles.Circles}><p>1</p></div>
+
+                                {/* Linha 1 (Acende se step >= 2) */}
+                                <div className={`${styles.connectLine} ${step >= 2 ? styles.connectLineActive : ''}`}></div>
+
+                                {/* Bolinha 2 */}
+                                <div className={styles.Circles}><p>2</p></div>
+
+                                {/* Linha 2 (Acende se step === 3) */}
+                                <div className={`${styles.connectLine} ${step === 3 ? styles.connectLineActive : ''}`}></div>
+
+                                {/* Bolinha 3 */}
+                                <div className={styles.Circles}><p>3</p></div>
+                            </div>
+
+
+                            {renderStep()}
+
+                            <div className={styles.ButtonGroup}>
+
+                                {step < 3 && (
+                                    <button
+                                        type="button"
+                                        onClick={nextStep}
+                                        disabled={!isStepValid()} // Trava o botão se não for válido
+                                    >
+                                        Prosseguir
+                                    </button>
+                                )}
+
+                                {step === 3 && (
+                                    <button
+                                        type="submit"
+                                        className={styles.SendButton}
+                                        disabled={!isStepValid()} // Trava o botão de envio se não for válido
+                                    >
+                                        Enviar
+                                    </button>
+                                )}
+
+                                {step === 1 && (
+                                    <button type="button" className={styles.LeaveButton} onClick={() => navigate('/')}>
+                                        Sair
+                                    </button>
+                                )}
+
+                                {step > 1 && (
+                                    <button type="button" className={styles.GoBackButton} onClick={prevStep}>
+                                        Voltar
+                                    </button>
+                                )}
+
+                            </div>
+                        </form>
+                    </motion.div>
+                </AnimatePresence>
+            </div>
+
         </div>
-    );
+    </div>
+);
 }
 
 export { Body };
