@@ -22,6 +22,17 @@ const moodMap: Record<string, string> = {
     "Reflexao": "acoustic",
 };
 
+
+//tradução dos tipos de cantores e bandas
+const styleMap: Record<string, string> = {
+    "Indie": "indie",
+    "Mainstream": "", // vazio por padrão
+    "Experimental": "experimental",
+    "Classico": "classic", // Pega "classic rock", "classic pop", etc.
+    "Alternativo": "alternative",
+};
+
+
 // Traduz o "Type" do formulário para o tipo de busca do Spotify
 const searchTypeMap: Record<string, "track" | "album" | "artist"> = {
     "Musica": "track",
@@ -37,11 +48,6 @@ export const getRecommendations = async (token: string, formData: any) => {
         const genres: string[] = (formData.GenreType || [])
             .filter((g: string) => g !== "Surpresa")
             .map((g: string) => genreMap[g] || g.toLowerCase());
-
-        const moods: string[] = (formData.FellinType || [])
-            .filter((f: string) => f !== "Destino")
-            .map((f: string) => moodMap[f])
-            .filter(Boolean);
 
         const spotifySearchURL = "https://" + "api.spotify.com" + "/v1/search";
 
@@ -60,6 +66,26 @@ export const getRecommendations = async (token: string, formData: any) => {
             return response.data[itemsKey]?.items ?? [];
         };
 
+        
+        const extraKeywords: string[] = [];
+
+        if (searchType === "artist") {
+            // Se for artista, traduz os Estilos usando o styleMap
+            const styles = (formData.FellinType || [])
+                .map((f: string) => styleMap[f])
+                .filter(Boolean); // O Boolean remove strings vazias (como o Mainstream)
+            
+            extraKeywords.push(...styles);
+        } else {
+            // Se for música ou álbum, traduz os Sentimentos usando o moodMap
+            const moods = (formData.FellinType || [])
+                .filter((f: string) => f !== "Destino")
+                .map((f: string) => moodMap[f])
+                .filter(Boolean);
+            
+            extraKeywords.push(...moods);
+        }
+
         // fallback
         let items: any[] = [];
 
@@ -68,7 +94,8 @@ export const getRecommendations = async (token: string, formData: any) => {
         if (genres.length > 0) {
             queryParts.push(searchType === "album" ? genres[0] : `genre:"${genres[0]}"`);
         }
-        queryParts.push(...moods);
+        queryParts.push(...extraKeywords);
+
         let qExact = queryParts.join(" ").trim();
 
         if (qExact) {
