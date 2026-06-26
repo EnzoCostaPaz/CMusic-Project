@@ -2,7 +2,7 @@ import styles from './About.module.css';
 
 function About() {
     return (
-        <section className={styles.SectionAbout}>
+        <section className={styles.SectionAbout} id='seçãoSobre'>
             
             <div className={styles.ContentLeft}>
                 <h2 className={styles.Title}>O que é o CMusic?</h2>

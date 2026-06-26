@@ -50,7 +50,6 @@
 }
 
 .Title{
-    white-space: nowrap;
     color: #FFFFFF;
     margin: 0;
     font-size: 30px;
@@ -63,10 +62,11 @@
 .Leftside{
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 15px;
 
-    width: 570px;
-    height: 260px;
+    width: 100%;
+    max-width: 570px;
+    height: auto;
     background-color: #2D1E36;
     border-radius: 12px;
     font-weight: 500;
@@ -75,17 +75,12 @@
     animation: animacaoEsquerda 0.9s ease-in-out;
 }
 .Leftside p{
-    max-width: 560px;
-    align-items: center;
-    justify-content: center;
-    display:flex;
-    color: #FFFFFF;
-    font-weight:200;
-
+   color: #FFFFFF;
+    font-weight: 200;
     font-family: 'Alexandria';
     font-size: 22px;
     line-height: 1.6;
-    text-align:left;
+    margin: 0;
 }
 
 .ImgAsset{
@@ -97,4 +92,32 @@
     object-fit: contain;
 
     animation: animacaoDireita 0.9s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .SectionAbout {
+        flex-direction: column; /* Empilha o bloco de texto e a imagem */
+        margin-top: 80px; /* Reduz o espaço superior que era muito grande */
+        padding: 0 20px;
+        gap: 40px;
+        text-align: center; /* Centraliza tudo no mobile */
+    }
+
+    .ContentLeft {
+        max-width: 100%; /* Permite que o texto ocupe a tela toda */
+        align-items: center; /* Centraliza o título e o card de texto */
+    }
+
+    .Leftside {
+        padding: 20px;
+    }
+
+    .Leftside p {
+        font-size: 16px;
+        text-align: center; /* Texto centralizado para melhor leitura no celular */
+    }
+
+    .ImgAsset {
+        max-width: 280px; /* Reduz a imagem para não dominar a tela do celular */
+    }
 }

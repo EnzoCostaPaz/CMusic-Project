@@ -2,6 +2,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
 
+
+.ContainerBlock{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    padding:  0 20px;
+}
+
+.BlockedContainer h1 {
+    font-family: 'Source Code Pro', monospace;
+    color: #FFFFFF;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.BlockedContainer p {
+    font-family: 'Alexandria', sans-serif;
+    color: #FFFFFF;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.BlockedContainer .SubText {
+    color: #b3b3b3;
+    font-size: 15px;
+    font-weight: 300;
+    max-width: 80%;
+    line-height: 1.5;
+}
+
 .FormContainer {
     width: 100%;
     min-height: 100vh;

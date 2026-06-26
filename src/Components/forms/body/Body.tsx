@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getSpotifyToken } from '../../../service/spotifyAuth';
 import { getRecommendations } from '../../../service/spotifyService';
+
 
 import styles from './Body.module.css';
 
@@ -10,6 +12,40 @@ import styles from './Body.module.css';
 
 function Body() {
     const [[step, direction], setStep] = useState([1, 0]);
+    const [bloqueado, setBloqueado] = useState(false);
+    const [tentativas, setTentativas] = useState(0);
+
+    const limiteTentativas = 3;
+
+    // função para limitar tentativas
+    useEffect(() => {
+        const tenativaSalva = Cookies.get('total_tentativas');
+
+        if (tenativaSalva) {
+            //converte string em um numero
+            const numTentativas = parseInt(tenativaSalva, 10);
+            setTentativas(numTentativas);
+
+            if (numTentativas >= limiteTentativas) {
+                setBloqueado(true);
+            }
+        }
+    }, []);
+
+    // função para contar as tentativas
+    const registrarTentativa = () => {
+        const novaTentativa = tentativas + 1;
+        setTentativas(novaTentativa);
+
+        // atualzia o cookie com o contador de 24 horas = expire
+        Cookies.set('total_tentativas', novaTentativa.toString(), { expires: 1 });
+
+        if (novaTentativa >= limiteTentativas) {
+            setBloqueado(true);
+        }
+    }
+
+
 
     // Função para desabilitar outros checks-boxes caso um seja selecionado
     const handleGenreChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -112,6 +148,8 @@ function Body() {
     const submitForm = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (bloqueado) return;
+
         const token = await getSpotifyToken();
 
         if (token) {
@@ -120,6 +158,7 @@ function Body() {
             if (tracks && tracks.length > 0) {
                 console.log("Músicas encontradas com sucesso!", tracks);
 
+                registrarTentativa();
                 navigate('/resultado', { state: { tracks: tracks } });
             } else {
                 console.log("A API não encontrou músicas com essa combinação exata.");
@@ -226,141 +265,157 @@ function Body() {
                     )
                 }
                 else if (formData.Type === 'Album' || formData.Type === 'Musica') {
-                    return(
-                    <div>
-                        <div className={styles.t}></div>
+                    return (
+                        <div>
+                            <div className={styles.t}></div>
 
-                        <h1>Agora...</h1>
-                        <p className={styles.PharseLastStep}>Existe alguma sensação que você gostaria de sentir?</p>
+                            <h1>Agora...</h1>
+                            <p className={styles.PharseLastStep}>Existe alguma sensação que você gostaria de sentir?</p>
 
-                        <div className={styles.CheckboxGridTwoCols}>
-                            <label>
-                                <input type="checkbox" value="Reflexao" checked={formData.FellinType.includes("Reflexao")} onChange={handleFeelingChange} /> Reflexão
-                            </label>
-                            <label>
-                                <input type="checkbox" value="Tristeza" checked={formData.FellinType.includes("Tristeza")} onChange={handleFeelingChange} /> Tristeza
-                            </label>
-                            <label>
-                                <input type="checkbox" value="Felicidade" checked={formData.FellinType.includes("Felicidade")} onChange={handleFeelingChange} /> Felicidade
-                            </label>
-                            <label>
-                                <input type="checkbox" value="Calmaria" checked={formData.FellinType.includes("Calmaria")} onChange={handleFeelingChange} /> Calmaria
-                            </label>
-                            <label className={styles.SpanTwo}>
-                                <input type="checkbox" value="Destino" checked={formData.FellinType.includes("Destino")} onChange={handleFeelingChange} /> Deixe o destino escolher
-                            </label>
-                        </div>
-                    </div >
-                );
-};
-                
-
+                            <div className={styles.CheckboxGridTwoCols}>
+                                <label>
+                                    <input type="checkbox" value="Reflexao" checked={formData.FellinType.includes("Reflexao")} onChange={handleFeelingChange} /> Reflexão
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="Tristeza" checked={formData.FellinType.includes("Tristeza")} onChange={handleFeelingChange} /> Tristeza
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="Felicidade" checked={formData.FellinType.includes("Felicidade")} onChange={handleFeelingChange} /> Felicidade
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="Calmaria" checked={formData.FellinType.includes("Calmaria")} onChange={handleFeelingChange} /> Calmaria
+                                </label>
+                                <label className={styles.SpanTwo}>
+                                    <input type="checkbox" value="Destino" checked={formData.FellinType.includes("Destino")} onChange={handleFeelingChange} /> Deixe o destino escolher
+                                </label>
+                            </div>
+                        </div >
+                    );
+                };
             default:
-return null;
+                return null;
         }
     };
 
 
-return (
-    <div className={styles.FormContainer}>
-        <div className={styles.FormContent}>
+    return (
+        <div className={styles.FormContainer}>
+            <div className={styles.FormContent}>
 
-            <div className={styles.LeftSide}>
-                <h1>Vamos começar a busca do melhor da musica para você</h1>
-                <img src="./imgs/Asset_forms.png" alt="Constelação" className={styles.ImgAstronauta} />
+                <div className={styles.LeftSide}>
+                    <h1>Vamos começar a busca do melhor da musica para você</h1>
+                    <img src="./imgs/Asset_forms.png" alt="Constelação" className={styles.ImgAstronauta} />
+                </div>
+
+                <div className={styles.RightSide}>
+                    <AnimatePresence mode='wait'>
+
+                        {bloqueado ? (
+                            <motion.div
+                                key="blocked"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className={styles.ContainerBlock}
+                            >
+                                <h1>OPS! Limite atigindo</h1>
+                                <p>Embora ficamos felizes em saber que você gostou do projeto</p>
+                                <p className={styles.subText}>
+                                    Mas não é o fim! volte amanhã para oferecermos mais recomendações para você
+                                </p>
+                                <button className={styles.GoBackButton} onClick={() => navigate('/')} style={{ marginTop: '30px' }}>Voltar para a pagina inicial</button>
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key={step}
+                                custom={direction}
+                                variants={variants}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
+                                transition={{
+                                    x: { type: 'spring', stiffness: 300, damping: 30 },
+                                    opacity: { duration: 0.2 }
+                                }}
+                                style={{
+                                    position: 'absolute',
+                                    width: '100%',
+                                    height: '100%',
+                                    left: 0,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'center',
+                                    padding: '0 60px',
+                                    boxSizing: 'border-box'
+                                }}
+                            >
+                                <form onSubmit={submitForm} className={styles.Form}>
+
+                                    <div className={styles.StepParts}>
+                                        {/* Bolinha 1 */}
+                                        <div className={styles.Circles}><p>1</p></div>
+
+                                        {/* Linha 1 (Acende se step >= 2) */}
+                                        <div className={`${styles.connectLine} ${step >= 2 ? styles.connectLineActive : ''}`}></div>
+
+                                        {/* Bolinha 2 */}
+                                        <div className={styles.Circles}><p>2</p></div>
+
+                                        {/* Linha 2 (Acende se step === 3) */}
+                                        <div className={`${styles.connectLine} ${step === 3 ? styles.connectLineActive : ''}`}></div>
+
+                                        {/* Bolinha 3 */}
+                                        <div className={styles.Circles}><p>3</p></div>
+                                    </div>
+
+
+                                    {renderStep()}
+
+                                    <div className={styles.ButtonGroup}>
+
+                                        {step < 3 && (
+                                            <button
+                                                type="button"
+                                                onClick={nextStep}
+                                                disabled={!isStepValid()} // Trava o botão se não for válido
+                                            >
+                                                Prosseguir
+                                            </button>
+                                        )}
+
+                                        {step === 3 && (
+                                            <button
+                                                type="submit"
+                                                className={styles.SendButton}
+                                                disabled={!isStepValid()} // Trava o botão de envio se não for válido
+                                            >
+                                                Enviar
+                                            </button>
+                                        )}
+
+                                        {step === 1 && (
+                                            <button type="button" className={styles.LeaveButton} onClick={() => navigate('/')}>
+                                                Sair
+                                            </button>
+                                        )}
+
+                                        {step > 1 && (
+                                            <button type="button" className={styles.GoBackButton} onClick={prevStep}>
+                                                Voltar
+                                            </button>
+                                        )}
+
+                                    </div>
+                                </form>
+                            </motion.div>
+                        )}
+
+                       
+                    </AnimatePresence>
+                </div>
+
             </div>
-
-            <div className={styles.RightSide}>
-                <AnimatePresence initial={false} custom={direction}>
-
-                    <motion.div
-                        key={step}
-                        custom={direction}
-                        variants={variants}
-                        initial="enter"
-                        animate="center"
-                        exit="exit"
-                        transition={{
-                            x: { type: 'spring', stiffness: 300, damping: 30 },
-                            opacity: { duration: 0.2 }
-                        }}
-                        style={{
-                            position: 'absolute',
-                            width: '100%',
-                            height: '100%',
-                            left: 0,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            padding: '0 60px',
-                            boxSizing: 'border-box'
-                        }}
-                    >
-                        <form onSubmit={submitForm} className={styles.Form}>
-
-                            <div className={styles.StepParts}>
-                                {/* Bolinha 1 */}
-                                <div className={styles.Circles}><p>1</p></div>
-
-                                {/* Linha 1 (Acende se step >= 2) */}
-                                <div className={`${styles.connectLine} ${step >= 2 ? styles.connectLineActive : ''}`}></div>
-
-                                {/* Bolinha 2 */}
-                                <div className={styles.Circles}><p>2</p></div>
-
-                                {/* Linha 2 (Acende se step === 3) */}
-                                <div className={`${styles.connectLine} ${step === 3 ? styles.connectLineActive : ''}`}></div>
-
-                                {/* Bolinha 3 */}
-                                <div className={styles.Circles}><p>3</p></div>
-                            </div>
-
-
-                            {renderStep()}
-
-                            <div className={styles.ButtonGroup}>
-
-                                {step < 3 && (
-                                    <button
-                                        type="button"
-                                        onClick={nextStep}
-                                        disabled={!isStepValid()} // Trava o botão se não for válido
-                                    >
-                                        Prosseguir
-                                    </button>
-                                )}
-
-                                {step === 3 && (
-                                    <button
-                                        type="submit"
-                                        className={styles.SendButton}
-                                        disabled={!isStepValid()} // Trava o botão de envio se não for válido
-                                    >
-                                        Enviar
-                                    </button>
-                                )}
-
-                                {step === 1 && (
-                                    <button type="button" className={styles.LeaveButton} onClick={() => navigate('/')}>
-                                        Sair
-                                    </button>
-                                )}
-
-                                {step > 1 && (
-                                    <button type="button" className={styles.GoBackButton} onClick={prevStep}>
-                                        Voltar
-                                    </button>
-                                )}
-
-                            </div>
-                        </form>
-                    </motion.div>
-                </AnimatePresence>
-            </div>
-
         </div>
-    </div>
-);
+    );
 }
 
 export { Body };

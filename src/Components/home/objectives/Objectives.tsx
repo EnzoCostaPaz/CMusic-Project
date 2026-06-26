@@ -12,7 +12,7 @@ function Objectives() {
 
     return (
         <>
-            <div ref={ref} className={`${styles.SectionObjectives} ${inView ? styles.isVisible : ''}`}>
+            <div ref={ref} className={`${styles.SectionObjectives} ${inView ? styles.isVisible : ''}`} id='Secaoobjetivos'>
 
                 <div className={styles.Title}>
                     <h2>O que buscamos com esse projeto?</h2>

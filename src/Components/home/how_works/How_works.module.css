@@ -1,5 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
 
+@media (max-width: 1024px) {
+    .ImagemFundo {
+      
+        height: auto; 
+        min-height: 70vh; 
+        padding: 40px 5%;
+    }
+
+    .ImageAsset {
+        align-self: center; 
+        margin-left: 0; 
+        margin-top: 40px;
+    }
+
+    .Title h2 {
+        font-size: 26px; 
+    }
+}
+
 .ImagemFundo {
     margin-top: 90px;
 
@@ -57,4 +76,21 @@
 .ImageAsset.isVisible {
     opacity: 1;
     transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .ImagemFundo {
+        margin-top: 50px;
+        padding: 30px 20px;
+        min-height: 50vh; 
+    }
+
+    .Title h2 {
+        font-size: 20px; 
+        text-align: center; 
+    }
+
+    .ImageAsset {
+        margin-top: 20px;
+    }
 }

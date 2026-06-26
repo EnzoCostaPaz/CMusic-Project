@@ -1,8 +1,13 @@
 import styles from './Footer.module.css';
+import { useNavigate } from 'react-router-dom';
+
 // 1. Usando React Icons para facilitar o Hover de cor
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 
 function Footer() {
+
+    const navigate = useNavigate();
+
     return (
         <footer className={styles.Footer}>
             
@@ -17,18 +22,18 @@ function Footer() {
                             <div className={styles.coluna}>
                                 <p className={styles.titulo}>Seções</p>
                                 <ul className={styles.lista}>
-                                    <li><a href="#">O que é</a></li>
-                                    <li><a href="#">Como Funciona</a></li>
-                                    <li><a href="#">O que queremos</a></li>
+                                    <li><a href="#seçãoSobre">O que é</a></li>
+                                    <li><a href="#secaoComoFunciona">Como Funciona</a></li>
+                                    <li><a href="#Secaoobjetivos">O que queremos</a></li>
                                 </ul>
                             </div>
 
                             <div className={styles.coluna}>
                                 <p className={styles.titulo}>Páginas</p>
                                 <ul className={styles.lista}>
-                                    <li><a href="#">Sobre Nós</a></li>
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">Formulario</a></li>
+                                    <li><button>Sobre Nós</button></li>
+                                    <li><button>Home</button></li>
+                                    <li><button onClick={() => navigate('/formulario')}>Formulario</button></li>
                                 </ul>
                             </div>
                         </div>

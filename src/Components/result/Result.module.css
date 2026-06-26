@@ -163,3 +163,46 @@
     height: 90vh;
   }
 }
+
+/* celulares */
+@media (max-width: 850px) {
+    .phrase {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+
+    .ResultGrid {
+        width: 100%; 
+        max-width: 350px; 
+        padding: 25px 20px; 
+    }
+
+    .Image {
+        width: 180px;
+        height: 180px;
+    }
+
+    .NameRecomendatin h2 {
+        font-size: 22px;
+    }
+
+    .Authors p {
+        font-size: 13px;
+    }
+
+    .GoToSpotify {
+        width: 100%;
+    }
+
+    .GroupButtonResultContainer {
+        flex-direction: column;
+        width: 100%;
+        max-width: 350px;
+        gap: 15px; 
+    }
+
+    .TryAgainButton,
+    .GoBackButton {
+        width: 100%; 
+    }
+}

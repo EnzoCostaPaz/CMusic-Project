@@ -102,3 +102,46 @@
 .TextBox p {
     margin: 0;
 }
+
+@media (max-width: 1200px) {
+    .Content {
+        flex-wrap: wrap; 
+        gap: 30px; 
+        padding: 0 20px; 
+    }
+
+    .ContentBoxes {
+        width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .SectionObjectives {
+        margin-top: 100px; 
+    }
+
+    .Title h2 {
+        font-size: 20px; 
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .Content {
+        flex-direction: column; 
+        align-items: center; 
+        gap: 20px;
+    }
+
+    .ContentBoxes {
+        width: 100%;
+        max-width: 350px; 
+        height: auto; 
+        padding: 25px 20px; 
+    }
+
+   
+    .ContentBoxes:hover {
+        transform: translateY(0) scale(1); 
+        background-color: #2D1E36; 
+    }
+}

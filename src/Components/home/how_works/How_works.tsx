@@ -11,8 +11,7 @@ function How_works() {
 
     return (
         <>
-            {/* CORREÇÃO 1: Removido o espaço do url() e ajustado para o fundo cobrir a tela */}
-            <div className={styles.ImagemFundo} style={{ backgroundImage: `url(${FundoImage})` }}>
+            <div className={styles.ImagemFundo} style={{ backgroundImage: `url(${FundoImage})` }} id='secaoComoFunciona'>
                 
                 <div className={styles.Title}>
                     <h2>Como Funciona o CMusic?</h2>

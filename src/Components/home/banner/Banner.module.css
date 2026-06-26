@@ -112,3 +112,76 @@ a{
     pointer-events: none; 
     animation: fadeIn 1.5s ease-in-out;
 }
+
+@media (min-width: 1200px) {
+    .ImgAstronauta {
+        min-width: 450px; 
+        max-height: 85vh; 
+        right: 5%; 
+    }
+    
+    .TextLeft p {
+        font-size: 1.7rem; 
+        max-width: 700px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .ImgAstronauta {
+        min-width: 450px; 
+        right: -5%;
+    }
+
+    .TextLeft p {
+        font-size: 1.8rem;
+        max-width: 450px;
+    }
+
+    .NavLinks {
+        gap: 20px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .ImagemBanner {
+        height: 60vh; 
+        padding: 30px 20px;
+    }
+
+    .HeaderOptions {
+        flex-direction: column; 
+        gap: 20px;
+    }
+
+    .HeaderRight {
+        justify-content: center; 
+    }
+
+    .NavLinks {
+        display: none; 
+    }
+
+    .ContentArea {
+        align-items: flex-start; 
+        margin-top: 40px;
+    }
+
+    .TextLeft p {
+        font-size: 1.6rem;
+        text-align: center; 
+        width: 100%;
+    }
+
+    .ImgAstronauta {
+        min-width: unset;
+        width: 320px; 
+        
+        left: 0;
+        right: 0;
+        margin: 0 auto; 
+        bottom: 0;
+        
+        opacity: 0.3;
+        z-index: 0;
+    }
+}

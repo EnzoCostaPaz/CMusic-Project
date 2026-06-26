@@ -68,8 +68,24 @@
     transition: color 0.3s ease; 
 }
 
+.lista button {
+    color: #FFFFFF;
+    font-family: 'Alexandria';
+    font-size: 16px;
+    font-weight: 200;
+    text-decoration: none;
+    transition: color 0.3s ease; 
+    background-color: transparent;
+    border:none;
+}
+
 .lista a:hover {
     color: #501A5E;
+}
+
+.lista button:hover {
+    color: #501A5E;
+    cursor: pointer;
 }
 
 .Linha {
@@ -114,3 +130,23 @@
     font-weight: 400;
     margin: 0;
 }
+
+@media (max-width: 850px) {
+    .TopSection {
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center;
+    }
+
+    .Phrase {
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+
+    .colunasContent {
+        width: 100%;
+        justify-content: center; 
+        gap: 50px;
+    }
+}
+
