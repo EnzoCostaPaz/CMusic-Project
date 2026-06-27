@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import{ useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom'; // Importamos o useLocation
 import styles from './Result.module.css';
-import { motion, AnimatePresence, time } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 
 function Result() {

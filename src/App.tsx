@@ -1,5 +1,4 @@
-import { Banner, About, Objectives, How_works, Footer} from './Components'
-import { BrowserRouter , Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter , Routes, Route } from 'react-router-dom';
 import { Home } from './pages/home';
 import { Formulario } from './pages/formulario';
 import { Resultado } from './pages/resultado';
