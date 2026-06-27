@@ -20,6 +20,12 @@ const moodMap: Record<string, string> = {
     "Tristeza": "sad",
     "Calmaria": "chill",
     "Reflexao": "acoustic",
+    "Romance": 'romantic',
+    "Energia": "workout",
+    "Foco": "focus",
+    "Nostalgia": "nostalgia",
+    "Festa": "party",
+    "Raiva": "angry"
 };
 
 

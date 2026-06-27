@@ -196,7 +196,7 @@ function Body() {
                 return (
                     <div>
                         <h1>Agora...</h1>
-                        <p>Que gênero você está buscando?</p>
+                        <p className={styles.TextForms}>Que gênero você está buscando?</p>
 
                         <div className={styles.CheckboxGrid}>
                             <label>
@@ -272,7 +272,7 @@ function Body() {
                             <h1>Agora...</h1>
                             <p className={styles.PharseLastStep}>Existe alguma sensação que você gostaria de sentir?</p>
 
-                            <div className={styles.CheckboxGridTwoCols}>
+                            <div className={styles.CheckboxGrid}>
                                 <label>
                                     <input type="checkbox" value="Reflexao" checked={formData.FellinType.includes("Reflexao")} onChange={handleFeelingChange} /> Reflexão
                                 </label>
@@ -285,9 +285,28 @@ function Body() {
                                 <label>
                                     <input type="checkbox" value="Calmaria" checked={formData.FellinType.includes("Calmaria")} onChange={handleFeelingChange} /> Calmaria
                                 </label>
+                                <label>
+                                    <input type="checkbox" value="Romance" checked={formData.FellinType.includes("Romance")} onChange={handleFeelingChange} /> Romance
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="Energia" checked={formData.FellinType.includes("Energia")} onChange={handleFeelingChange} /> Energia
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="Foco" checked={formData.FellinType.includes("Foco")} onChange={handleFeelingChange} /> Foco
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="Nostalgia" checked={formData.FellinType.includes("Nostalgia")} onChange={handleFeelingChange} /> Nostalgia
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="Festa" checked={formData.FellinType.includes("Festa")} onChange={handleFeelingChange} /> Festa
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="Raiva" checked={formData.FellinType.includes("Raiva")} onChange={handleFeelingChange} /> Raiva
+                                </label>
                                 <label className={styles.SpanTwo}>
                                     <input type="checkbox" value="Destino" checked={formData.FellinType.includes("Destino")} onChange={handleFeelingChange} /> Deixe o destino escolher
                                 </label>
+
                             </div>
                         </div >
                     );
@@ -317,12 +336,12 @@ function Body() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 className={styles.ContainerBlock}
                             >
-                                <h1>OPS! Limite atigindo</h1>
-                                <p>Embora ficamos felizes em saber que você gostou do projeto</p>
+                                <h1 className={styles.blockedTitle}>OPS! Limite atigindo</h1>
+                                <p className={styles.TextBlocked}>Embora ficamos felizes em saber que você gostou do projeto, suas tentativa acabaram</p>
                                 <p className={styles.subText}>
                                     Mas não é o fim! volte amanhã para oferecermos mais recomendações para você
                                 </p>
-                                <button className={styles.GoBackButton} onClick={() => navigate('/')} style={{ marginTop: '30px' }}>Voltar para a pagina inicial</button>
+                                <button className={styles.BlockedButton} onClick={() => navigate('/')} style={{ marginTop: '30px' }}>Voltar para a pagina inicial</button>
                             </motion.div>
                         ) : (
                             <motion.div
@@ -337,15 +356,12 @@ function Body() {
                                     opacity: { duration: 0.2 }
                                 }}
                                 style={{
-                                    position: 'absolute',
                                     width: '100%',
                                     height: '100%',
                                     left: 0,
                                     display: 'flex',
                                     flexDirection: 'column',
                                     justifyContent: 'center',
-                                    padding: '0 60px',
-                                    boxSizing: 'border-box'
                                 }}
                             >
                                 <form onSubmit={submitForm} className={styles.Form}>
@@ -404,12 +420,14 @@ function Body() {
                                             </button>
                                         )}
 
+                                        <p className={styles.TentaviasRestantestext}>Atenção! Você possui {limiteTentativas - tentativas} tentativa(s) restante hoje</p>
+
                                     </div>
                                 </form>
                             </motion.div>
                         )}
 
-                       
+
                     </AnimatePresence>
                 </div>
 

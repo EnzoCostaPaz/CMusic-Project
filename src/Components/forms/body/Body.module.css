@@ -47,15 +47,17 @@
 
 .FormContent {
     display: flex;
+    align-items: stretch;
     width: 1040px;
-    height: 550px;
+    min-height: 550px;
+    height: auto;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border-radius: 25px;
 }
 
 .LeftSide {
     width: 50%;
-    height: 100%;
+    height: auto;
     background-color: #2D1E36;
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
@@ -83,7 +85,7 @@
 
 .RightSide {
     width: 50%;
-    height: 100%;
+    height: auto;
     background-color: #1E1C2F;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
@@ -151,6 +153,14 @@
     margin: 0 0 10px 0;
 }
 
+.blockedTitle{
+ font-family: 'Source Code Pro', monospace;
+    color: #fff;
+    font-weight: 700;
+    font-size: 28px;
+    margin: 0 0 10px 0;
+}
+
 .Form p {
     font-family: 'Source Code Pro', monospace;
     width: 65%;
@@ -159,6 +169,23 @@
     margin: 0 0 30px 0;
 }
 
+.TextBlocked, .subText{
+    font-family: 'Source Code Pro', monospace;
+    width:100%;
+    color: #fff;
+    font-size: 15px;
+}
+
+.Form .TentaviasRestantestext {
+    width: 100%;
+    color: #b3b3b3; 
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400; 
+    font-size: 13px; 
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 0;
+}
 
 .Form .PharseLastStep {
     width: 80%;
@@ -280,6 +307,25 @@
 .ButtonGroup .GoBackButton{
     background-color: #2D1E36;
     width: 100px;
+}
+
+.BlockedButton{
+    background-color: #2D1E36;
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: 'Afacad', sans-serif;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 250px;
+}
+
+.BlockedButton:hover{
+    background-color: #501A5E;
+
 }
 
 .ButtonGroup .LeaveButton:hover {
