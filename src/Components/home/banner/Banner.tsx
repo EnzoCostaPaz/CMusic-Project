@@ -1,4 +1,4 @@
-import styles from './banner.module.css';
+import styles from './Banner.module.css';
 import { useNavigate } from 'react-router-dom';
 import Banner_Degrade from '../../../assets/Banner_Degrade.png';
 

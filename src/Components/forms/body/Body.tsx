@@ -4,8 +4,6 @@ import Cookies from 'js-cookie';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getSpotifyToken } from '../../../service/spotifyAuth';
 import { getRecommendations } from '../../../service/spotifyService';
-
-
 import styles from './Body.module.css';
 
 
