@@ -310,7 +310,9 @@ function Body() {
                             </div>
                         </div >
                     );
-                };
+                }
+                return null;
+                ;
             default:
                 return null;
         }
