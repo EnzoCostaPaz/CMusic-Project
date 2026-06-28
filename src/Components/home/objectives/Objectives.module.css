@@ -117,31 +117,39 @@
 
 @media (max-width: 768px) {
     .SectionObjectives {
-        margin-top: 100px; 
+        margin-top: 70px;
     }
 
+    /* Título alinhado à esquerda, como no mockup */
     .Title h2 {
-        font-size: 20px; 
-        text-align: center;
-        padding: 0 20px;
+        justify-content: flex-start;
+        font-size: 22px;
+        text-align: left;
+        padding: 0 22px;
     }
 
     .Content {
-        flex-direction: column; 
-        align-items: center; 
-        gap: 20px;
+        flex-direction: column;
+        align-items: stretch;       /* os cards ocupam a largura toda */
+        gap: 22px;
+        padding: 0 22px;
+        margin-top: 35px;
     }
 
     .ContentBoxes {
         width: 100%;
-        max-width: 350px; 
-        height: auto; 
-        padding: 25px 20px; 
+        max-width: none;
+        height: auto;
+        padding: 28px 22px;
     }
 
-   
+    /* Ordem do mockup: Facilidade, Agilidade, Conforto */
+    .Content .ContentBoxes:nth-child(1) { order: 2; } /* Agilidade */
+    .Content .ContentBoxes:nth-child(2) { order: 1; } /* Facilidade */
+    .Content .ContentBoxes:nth-child(3) { order: 3; } /* Conforto */
+
     .ContentBoxes:hover {
-        transform: translateY(0) scale(1); 
-        background-color: #2D1E36; 
+        transform: translateY(0) scale(1);
+        background-color: #2D1E36;
     }
 }

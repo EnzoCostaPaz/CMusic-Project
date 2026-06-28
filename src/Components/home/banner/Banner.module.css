@@ -144,44 +144,99 @@ a{
 
 @media (max-width: 768px) {
     .ImagemBanner {
-        height: 60vh; 
-        padding: 30px 20px;
+        min-height: 50vh;
+        height: auto;
+        padding: 18px 16px;
     }
 
+    /* Header em uma linha só: "Sobre/Github" à esquerda e "Utilizar" à direita */
     .HeaderOptions {
-        flex-direction: column; 
-        gap: 20px;
+        flex-wrap: nowrap;
+        gap: 8px;
     }
 
-    .HeaderRight {
-        justify-content: center; 
+    /* Espaçador vazio da esquerda some; a navegação assume o lado esquerdo */
+    .HeaderLeft {
+        display: none;
     }
 
     .NavLinks {
-        display: none; 
+        flex: 1;
+        justify-content: flex-start;
+        gap: 10px;
     }
 
+    .HeaderRight {
+        flex: 1;
+        justify-content: flex-end;
+    }
+
+    /* Botões compactos em formato de pílula */
+    .ImagemBanner button {
+        width: auto;
+        padding: 0 14px;
+        height: 32px;
+        font-size: 13px;
+        border-width: 2px;
+    }
+
+    /* Texto alinhado à esquerda; o astronauta fica visível à direita */
     .ContentArea {
-        align-items: flex-start; 
-        margin-top: 40px;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-top: 22px;
+    }
+
+    /* Limita o bloco de texto a ~58% para o astronauta caber à direita */
+    .TextLeft {
+        max-width: 58%;
     }
 
     .TextLeft p {
-        font-size: 1.6rem;
-        text-align: center; 
+        font-size: 1rem;
+        text-align: left;
         width: 100%;
+        max-width: 100%;
+        line-height: 1.4;
     }
 
     .ImgAstronauta {
         min-width: unset;
-        width: 320px; 
-        
-        left: 0;
-        right: 0;
-        margin: 0 auto; 
+        width: 190px;
+        max-height: none;
+
+        left: auto;
+        right: -8px;
+        margin: 0;
         bottom: 0;
-        
-        opacity: 0.3;
-        z-index: 0;
+
+        opacity: 1;
+        z-index: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .ImagemBanner {
+        min-height: 44vh;
+        padding: 16px 14px;
+    }
+
+    .ImagemBanner button {
+        padding: 0 12px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .TextLeft {
+        max-width: 56%;
+    }
+
+    .TextLeft p {
+        font-size: 0.9rem;
+    }
+
+    .ImgAstronauta {
+        width: 158px;
+        right: -6px;
     }
 }

@@ -81,13 +81,19 @@
 @media (max-width: 768px) {
     .ImagemFundo {
         margin-top: 50px;
-        padding: 30px 20px;
-        min-height: 50vh; 
+        padding: 30px 22px;
+        min-height: 50vh;
+    }
+
+    /* Título alinhado à esquerda, como no mockup */
+    .Title {
+        width: 100%;
     }
 
     .Title h2 {
-        font-size: 20px; 
-        text-align: center; 
+        justify-content: flex-start;
+        font-size: 20px;
+        text-align: left;
     }
 
     .ImageAsset {

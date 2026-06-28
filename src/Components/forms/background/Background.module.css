@@ -2,15 +2,31 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100vh;
-    
+    /* Antes era height: 100vh com overflow: hidden, o que cortava o conteúdo
+       no celular (o final do formulário ficava inacessível). Agora usamos
+       min-height para o fundo crescer junto com o conteúdo e liberar a rolagem. */
+    min-height: 100vh;
+
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    
+
     padding: 40px 8%;
     box-sizing: border-box;
-    
-    position: relative; 
-    overflow: hidden; 
+
+    position: relative;
+    /* Só corta no eixo horizontal; o vertical fica livre para rolar */
+    overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+    .BackgroundImage {
+        padding: 24px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .BackgroundImage {
+        padding: 16px 12px;
+    }
 }

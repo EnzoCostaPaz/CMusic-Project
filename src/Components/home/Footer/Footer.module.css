@@ -133,20 +133,47 @@
 
 @media (max-width: 850px) {
     .TopSection {
-        flex-direction: column; 
-        align-items: center; 
-        text-align: center;
+        flex-direction: column;
+        align-items: flex-start;      /* frase e colunas à esquerda */
+        text-align: left;
+        gap: 30px;
     }
 
     .Phrase {
         margin-top: 0;
-        margin-bottom: 30px;
+        margin-bottom: 0;
     }
 
     .colunasContent {
         width: 100%;
-        justify-content: center; 
-        gap: 50px;
+        justify-content: flex-start;  /* colunas começam pela esquerda */
+        gap: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Footer {
+        margin-top: 80px;
+    }
+
+    .Container {
+        padding: 0 18px;
+    }
+
+    .Phrase {
+        font-size: 18px;
+    }
+
+    .colunasContent {
+        gap: 60px;
+    }
+
+    .titulo {
+        font-size: 18px;
+    }
+
+    .ContentIcones {
+        gap: 24px;
     }
 }
 

@@ -103,7 +103,6 @@
     font-size: 14px;
     font-weight: 300;
     margin: 0 0 25px 0;
-    /* Esse é o respiro que empurra o botão para baixo */
     text-align: center;
 }
 
@@ -203,6 +202,44 @@
 
     .TryAgainButton,
     .GoBackButton {
-        width: 100%; 
+        width: 100%;
+    }
+}
+
+/* celulares pequenos */
+@media (max-width: 480px) {
+    .ResultContainer {
+        padding: 30px 14px;
+    }
+
+    .phrase {
+        font-size: 18px;
+        margin-bottom: 24px;
+        padding: 0 6px;
+    }
+
+    .ResultGrid {
+        padding: 22px 16px;
+        margin-bottom: 30px;
+    }
+
+    .Image {
+        width: 150px;
+        height: 150px;
+        border-width: 4px;
+    }
+
+    .NameRecomendatin h2 {
+        font-size: 20px;
+    }
+
+    .GoToSpotify {
+        font-size: 15px;
+    }
+
+    /* Spinner de carregamento um pouco menor no celular */
+    .spinner {
+        width: 42px;
+        height: 42px;
     }
 }

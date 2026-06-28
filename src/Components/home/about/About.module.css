@@ -96,28 +96,54 @@
 
 @media (max-width: 768px) {
     .SectionAbout {
-        flex-direction: column; /* Empilha o bloco de texto e a imagem */
-        margin-top: 80px; /* Reduz o espaço superior que era muito grande */
-        padding: 0 20px;
-        gap: 40px;
-        text-align: center; /* Centraliza tudo no mobile */
+        flex-direction: column;
+        margin-top: 60px;
+        padding: 0 22px;
+        gap: 20px;
+        text-align: left;          /* alinhado à esquerda, como no mockup */
+        align-items: flex-start;
     }
 
     .ContentLeft {
-        max-width: 100%; /* Permite que o texto ocupe a tela toda */
-        align-items: center; /* Centraliza o título e o card de texto */
+        max-width: 100%;
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .Title {
+        font-size: 26px;
     }
 
     .Leftside {
-        padding: 20px;
+        max-width: 100%;           /* o card ocupa a largura toda */
+        padding: 22px;
     }
 
     .Leftside p {
         font-size: 16px;
-        text-align: center; /* Texto centralizado para melhor leitura no celular */
+        text-align: left;
     }
 
+    /* A imagem lateral não aparece no celular */
     .ImgAsset {
-        max-width: 280px; /* Reduz a imagem para não dominar a tela do celular */
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .SectionAbout {
+        margin-top: 50px;
+    }
+
+    .Title {
+        font-size: 24px;
+    }
+
+    .Leftside {
+        padding: 18px;
+    }
+
+    .Leftside p {
+        font-size: 15px;
     }
 }

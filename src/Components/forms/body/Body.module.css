@@ -413,11 +413,17 @@
     }
 }
 
-/* celulares */ 
+/* tablets / celulares maiores */
 @media (max-width: 850px) {
+    .FormContainer {
+        padding: 24px 12px;
+    }
+
     .FormContent {
-        flex-direction: column; 
+        width: 100%;
+        flex-direction: column;
         height: auto;
+        min-height: 0;
     }
 
     .LeftSide {
@@ -425,12 +431,17 @@
         height: auto;
         border-top-left-radius: 25px;
         border-top-right-radius: 25px;
-        border-bottom-left-radius: 0; 
+        border-bottom-left-radius: 0;
         padding: 30px 20px;
     }
 
+    .LeftSide h1 {
+        font-size: 19px;
+        margin-bottom: 20px;
+    }
+
     .ImgAstronauta {
-        max-width: 150px; 
+        max-width: 150px;
     }
 
     .RightSide {
@@ -438,24 +449,151 @@
         height: auto;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
-        border-top-right-radius: 0; 
+        border-top-right-radius: 0;
         padding: 30px 20px;
     }
 
-    .Form p {
-        width: 100%; 
+    .Form h1 {
+        font-size: 24px;
+    }
+
+    .Form p,
+    .Form .PharseLastStep {
+        width: 100%;
         font-size: 16px;
     }
 
     .StepParts {
-        justify-content: center; 
+        justify-content: center;
     }
 
     .connectLine {
         width: 40px;
     }
+}
+
+/* celular: mostra apenas o card do formulário, sem o painel da esquerda */
+@media (max-width: 600px) {
+    .FormContainer {
+        /* card alinhado ao topo, e não centralizado verticalmente */
+        align-items: flex-start;
+        padding: 28px 16px;
+    }
+
+    /* esconde o painel com o título grande e o astronauta */
+    .LeftSide {
+        display: none;
+    }
+
+    .FormContent {
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+        flex-direction: column;
+    }
+
+    .RightSide {
+        width: 100%;
+        /* vira o card único: todos os cantos arredondados */
+        border-radius: 25px;
+        padding: 28px 22px;
+    }
+
+    /* etapas ocupando a largura do card (1 na ponta esquerda, 3 na direita) */
+    .StepParts {
+        justify-content: space-between;
+        padding: 24px 0;
+    }
+
+    .connectLine {
+        flex: 1;
+        width: auto;
+        margin: 0 6px;
+    }
+
+    /* brilho roxo ao redor das bolinhas das etapas */
+    .Circles {
+        box-shadow: 0 0 14px rgba(123, 31, 162, 0.6);
+    }
+
+    .Form h1 {
+        font-size: 22px;
+    }
+
+    .Form p,
+    .Form .PharseLastStep {
+        font-size: 15px;
+        margin-bottom: 22px;
+    }
+
+    /* labels e checkboxes compactos para os gêneros caberem em 3 colunas */
+    .RadioGroup label,
+    .CheckboxGrid label,
+    .CheckboxGridTwoCols label {
+        font-size: 14px;
+        gap: 7px;
+    }
+
+    .CheckboxGrid input[type="checkbox"],
+    .CheckboxGridTwoCols input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+    }
 
     .CheckboxGrid {
-        grid-template-columns: repeat(2, 1fr);
+        gap: 16px 8px;
+        margin-bottom: 30px;
+    }
+
+    .CheckboxGridTwoCols {
+        gap: 16px 10px;
+        margin-bottom: 30px;
+    }
+
+    .ButtonGroup button,
+    .BlockedButton {
+        width: 100%;
+        max-width: 220px;
+    }
+}
+
+/* celulares pequenos: ajustes finos do indicador de etapas e textos */
+@media (max-width: 480px) {
+    .FormContainer {
+        padding: 24px 12px;
+    }
+
+    .RightSide {
+        padding: 26px 18px;
+    }
+
+    .Form h1,
+    .blockedTitle {
+        font-size: 21px;
+    }
+
+    .StepParts {
+        padding: 20px 0;
+    }
+
+    .Circles {
+        width: 42px;
+        height: 42px;
+    }
+
+    .StepParts .Circles p {
+        font-size: 22px;
+    }
+
+    .RadioGroup label,
+    .CheckboxGrid label,
+    .CheckboxGridTwoCols label {
+        font-size: 13px;
+        gap: 6px;
+    }
+
+    .CheckboxGrid {
+        gap: 14px 6px;
     }
 }
