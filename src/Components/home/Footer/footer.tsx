@@ -43,10 +43,10 @@ function Footer() {
                 <hr className={styles.Linha}></hr>
 
                 <div className={styles.ContentIcones}>
-                    <a href="https://www.linkedin.com/in/enzo-costa-paz-7b5a9b21b/" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.linkedin.com/in/enzo-costa-718895370/" target="_blank" rel="noopener noreferrer">
                         <FaLinkedinIn className={styles.Icon} />
                     </a>
-                    <a href="https://github.com/EnzoCostaPaz" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/EnzoCostaPaz/CMusic-Project.git" target="_blank" rel="noopener noreferrer">
                         <FaGithub className={styles.Icon} />
                     </a>
                 </div>
