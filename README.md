@@ -41,9 +41,9 @@ Você pode testar o projeto rodando ao vivo através deste link:
 4. Faça o clone deste repositório na sua máquina:
    ```bash
    git clone [https://github.com/SeuUsuario/c-music-project-three.git](https://github.com/SeuUsuario/c-music-project-three.git)
-5. Acesse a pasta do projeto e instale as dependências:
-   `cd c-music-project-three
-    npm install`
+5. Acesse a pasta do projeto e instale as dependências:<br>
+   `cd c-music-project-three`<br>
+    `npm install`
 6. Crie um arquivo chamado .env na raiz do projeto e adicione as suas chaves do Spotify:<br>
    `VITE_SPOTIFY_CLIENT_ID="chave"`<br>
     `VITE_SPOTIFY_CLIENT_SECRET="chave"`
