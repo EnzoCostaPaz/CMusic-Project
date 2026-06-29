@@ -1,5 +1,4 @@
 import styles from './How_works.module.css';
-import FundoImage from '../../../assets/Asset_fundo_Works.png';
 import { useInView } from 'react-intersection-observer';
 
 function How_works() {
@@ -11,7 +10,7 @@ function How_works() {
 
     return (
         <>
-            <div className={styles.ImagemFundo} style={{ backgroundImage: `url(${FundoImage})` }} id='secaoComoFunciona'>
+            <div className={styles.ImagemFundo} id='secaoComoFunciona'>
                 
                 <div className={styles.Title}>
                     <h2>Como Funciona o CMusic?</h2>

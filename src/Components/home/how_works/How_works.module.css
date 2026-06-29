@@ -28,6 +28,8 @@
     width: 100%;
     height: 100vh;
 
+    /* fundo do desktop (antes era inline no TSX) */
+    background-image: url('../../../assets/Asset_fundo_Works.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -81,22 +83,62 @@
 @media (max-width: 768px) {
     .ImagemFundo {
         margin-top: 50px;
-        padding: 30px 22px;
-        min-height: 50vh;
+        height: auto;
+        min-height: 0;
+        /* mesma proporção da imagem do celular: a cena aparece inteira, sem corte */
+        aspect-ratio: 412 / 216;
+
+        /* troca o fundo desktop pela versão feita para celular */
+        background-image: url('../../../assets/Assets_fundo_cell.png');
+        background-size: cover;
+        background-position: center;
+
+        padding: 16px 18px;
+        justify-content: flex-start;
+        align-items: stretch;
     }
 
-    /* Título alinhado à esquerda, como no mockup */
+    /* Título alinhado à esquerda, sobre a cena */
     .Title {
         width: 100%;
     }
 
     .Title h2 {
         justify-content: flex-start;
-        font-size: 20px;
+        font-size: 18px;
         text-align: left;
+        margin-bottom: 0;
     }
 
+    /* Os balões ocupam o espaço restante e encolhem para caber sem estourar */
     .ImageAsset {
-        margin-top: 20px;
+        flex: 1;
+        min-height: 0;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        align-self: stretch;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ImageAsset img {
+        max-height: 100%;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .ImagemFundo {
+        margin-top: 40px;
+        padding: 14px 14px;
+    }
+
+    .Title h2 {
+        font-size: 16px;
     }
 }

@@ -19,7 +19,8 @@
 
 @keyframes animacaoDireita{
     from{
-        transform: translateX(200%);
+        /* 100% (e não 200%) para não jogar a imagem tão longe pra fora da tela */
+        transform: translateX(100%);
         opacity: 0;
     }
     to{
@@ -30,16 +31,18 @@
 
 .SectionAbout{
     margin-top: 150px;
-    width: 100%;
+    width: 95%;
     height: auto;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    padding: 0 95px;
+    padding: 0 5%;
     box-sizing: border-box;
-    gap: 140px;
+    gap: 80px;
+
+    overflow: hidden;
 }
 
 .ContentLeft {
@@ -68,7 +71,7 @@
     max-width: 570px;
     height: auto;
     background-color: #2D1E36;
-    border-radius: 12px;
+    border-radius: 25px;
     font-weight: 500;
     padding: 25px;
 
@@ -100,7 +103,7 @@
         margin-top: 60px;
         padding: 0 22px;
         gap: 20px;
-        text-align: left;          /* alinhado à esquerda, como no mockup */
+        text-align: left;      
         align-items: flex-start;
     }
 
@@ -124,7 +127,6 @@
         text-align: left;
     }
 
-    /* A imagem lateral não aparece no celular */
     .ImgAsset {
         display: none;
     }

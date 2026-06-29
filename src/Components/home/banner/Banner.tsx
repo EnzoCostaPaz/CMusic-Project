@@ -20,7 +20,7 @@ function Banner() {
 
                 <div className={styles.HeaderRight}>
                     <button className={styles.ButtonUtilizar} onClick={() => navigate('/formulario')}>
-                        Utilizar
+                        Formulario
                     </button>
                 </div>
             </header>

@@ -108,28 +108,41 @@ a{
     max-height: 70vh; 
     min-width: 500px;
     width: auto;
-    z-index: 1; 
-    pointer-events: none; 
+    z-index: 1;
+    pointer-events: none;
     animation: fadeIn 1.5s ease-in-out;
 }
 
-@media (min-width: 1200px) {
+/* notebooks: astronauta e texto menores */
+@media (max-width: 1440px) {
     .ImgAstronauta {
-        min-width: 450px; 
-        max-height: 85vh; 
-        right: 5%; 
+        min-width: 380px;
+        max-height: 55vh;
     }
-    
+
     .TextLeft p {
-        font-size: 1.7rem; 
-        max-width: 700px;
+        font-size: 1.6rem;
+        max-width: 520px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .ImgAstronauta {
+        min-width: 330px;
+        max-height: 50vh;
+        left: 60%;
+    }
+
+    .TextLeft p {
+        font-size: 1.35rem;
+        max-width: 600px;
     }
 }
 
 @media (max-width: 1024px) {
     .ImgAstronauta {
-        min-width: 450px; 
-        right: -5%;
+        min-width: 90px; 
+        right: 10px;
     }
 
     .TextLeft p {
@@ -144,18 +157,16 @@ a{
 
 @media (max-width: 768px) {
     .ImagemBanner {
-        min-height: 50vh;
+        min-height: 35vh;
         height: auto;
         padding: 18px 16px;
     }
 
-    /* Header em uma linha só: "Sobre/Github" à esquerda e "Utilizar" à direita */
     .HeaderOptions {
         flex-wrap: nowrap;
         gap: 8px;
     }
 
-    /* Espaçador vazio da esquerda some; a navegação assume o lado esquerdo */
     .HeaderLeft {
         display: none;
     }
@@ -171,7 +182,6 @@ a{
         justify-content: flex-end;
     }
 
-    /* Botões compactos em formato de pílula */
     .ImagemBanner button {
         width: auto;
         padding: 0 14px;
@@ -180,14 +190,12 @@ a{
         border-width: 2px;
     }
 
-    /* Texto alinhado à esquerda; o astronauta fica visível à direita */
     .ContentArea {
         align-items: flex-start;
         justify-content: flex-start;
         margin-top: 22px;
     }
 
-    /* Limita o bloco de texto a ~58% para o astronauta caber à direita */
     .TextLeft {
         max-width: 58%;
     }
@@ -217,7 +225,7 @@ a{
 
 @media (max-width: 480px) {
     .ImagemBanner {
-        min-height: 44vh;
+        min-height: 25vh;
         padding: 16px 14px;
     }
 
@@ -228,15 +236,21 @@ a{
     }
 
     .TextLeft {
-        max-width: 56%;
+        padding: 25px;
+        margin-top: 25px;
+        max-width: 45%;
     }
 
     .TextLeft p {
-        font-size: 0.9rem;
+        font-size: 0.5rem;
     }
 
     .ImgAstronauta {
-        width: 158px;
+        width: 200px;
         right: -6px;
+    }
+
+    .ButtonUtilizar{
+        margin-right: 15px;
     }
 }

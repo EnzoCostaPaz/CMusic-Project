@@ -38,11 +38,14 @@
     margin-top: 50px;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;      /* se faltar largura, quebra linha em vez de estourar */
     gap: 40px;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .ContentBoxes {
-    width: 350px;
+    width: 320px;
     height: 190px;
     border-radius: 10px;
     background-color: #2D1E36;
