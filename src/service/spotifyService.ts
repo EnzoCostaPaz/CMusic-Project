@@ -46,6 +46,9 @@ const searchTypeMap: Record<string, "track" | "album" | "artist"> = {
     "Cantor": "artist",
 };
 
+// Sorteia um item de uma lista
+const pickRandom = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
+
 // Função principal que fará o pedido das músicas
 export const getRecommendations = async (token: string, formData: any) => {
     try {
@@ -55,76 +58,128 @@ export const getRecommendations = async (token: string, formData: any) => {
             .filter((g: string) => g !== "Surpresa")
             .map((g: string) => genreMap[g] || g.toLowerCase());
 
-        const spotifySearchURL = "https://" + "api.spotify.com" + "/v1/search";
+        const spotifyBaseURL = "https://" + "api.spotify.com" + "/v1";
+        const spotifySearchURL = spotifyBaseURL + "/search";
+        const authHeader = { Authorization: `Bearer ${token}` };
 
-      
         const searchSpotify = async (queryToSearch: string) => {
-            const response = await axios.get(spotifySearchURL, {
-                headers: { Authorization: `Bearer ${token}` },
-                params: {
-                    q: queryToSearch,
-                    type: searchType,
-                    market: "BR",
-                    limit: 1 
-                }
-            });
             const itemsKey = `${searchType}s` as "tracks" | "albums" | "artists";
-            return response.data[itemsKey]?.items ?? [];
+
+            const doRequest = (offset: number) =>
+                axios.get(spotifySearchURL, {
+                    headers: authHeader,
+                    params: { q: queryToSearch, type: searchType, market: "BR", limit: 50, offset }
+                });
+
+            // offset aleatório alcança resultados mais "fundo" (mais variedade)
+            const offset = Math.floor(Math.random() * 50);
+            let response = await doRequest(offset);
+            let items = response.data[itemsKey]?.items ?? [];
+
+            // se o offset foi longe demais e veio vazio, tenta do começo
+            if (items.length === 0 && offset > 0) {
+                response = await doRequest(0);
+                items = response.data[itemsKey]?.items ?? [];
+            }
+
+            return items.filter(Boolean);
         };
 
-        
+        const searchViaPlaylist = async (query: string) => {
+            const response = await axios.get(spotifySearchURL, {
+                headers: authHeader,
+                params: { q: query, type: "playlist", market: "BR", limit: 20 }
+            });
+
+            // o Spotify às vezes devolve itens nulos na lista de playlists
+            let playlists = (response.data.playlists?.items ?? []).filter(Boolean);
+            if (playlists.length === 0) return [];
+
+            // embaralha entre as 10 mais relevantes e tenta até 3 playlists
+            playlists = playlists.slice(0, 10).sort(() => Math.random() - 0.5);
+
+            for (const playlist of playlists.slice(0, 3)) {
+                try {
+                    const tracksRes = await axios.get(
+                        `${spotifyBaseURL}/playlists/${playlist.id}/tracks`,
+                        { headers: authHeader, params: { market: "BR", limit: 50 } }
+                    );
+                    const tracks = (tracksRes.data.items ?? [])
+                        .map((it: any) => it.track)
+                        .filter((t: any) => t && t.id); // remove faixas locais/indisponíveis
+
+                    if (tracks.length > 0) return tracks;
+                } catch {
+                    // playlist indisponível (ex.: 404), tenta a próxima
+                }
+            }
+            return [];
+        };
+
+        // Monta as palavras-chave extras (humor para faixa/álbum, estilo para artista)
         const extraKeywords: string[] = [];
 
         if (searchType === "artist") {
-            // Se for artista, traduz os Estilos usando o styleMap
             const styles = (formData.FellinType || [])
                 .map((f: string) => styleMap[f])
-                .filter(Boolean); // O Boolean remove strings vazias (como o Mainstream)
-            
+                .filter(Boolean); // remove strings vazias (como o Mainstream)
             extraKeywords.push(...styles);
         } else {
-            // Se for música ou álbum, traduz os Sentimentos usando o moodMap
             const moods = (formData.FellinType || [])
                 .filter((f: string) => f !== "Destino")
                 .map((f: string) => moodMap[f])
                 .filter(Boolean);
-            
             extraKeywords.push(...moods);
         }
 
-        // fallback
-        let items: any[] = [];
-
-        // plano a: Busca de Genero + sentimento
+        // Query com filtro genre: (para busca direta de track/artist)
         const queryParts: string[] = [];
         if (genres.length > 0) {
             queryParts.push(searchType === "album" ? genres[0] : `genre:"${genres[0]}"`);
         }
         queryParts.push(...extraKeywords);
+        const qExact = queryParts.join(" ").trim();
 
-        let qExact = queryParts.join(" ").trim();
+        // Query "humana" (texto solto) usada na busca de playlist
+        const humanQuery = [...genres, ...extraKeywords].join(" ").trim();
 
-        if (qExact) {
+        let items: any[] = [];
+
+        // PLANO A: faixa com humor -> via playlist (melhor relevância)
+        if (searchType === "track" && extraKeywords.length > 0 && humanQuery) {
+            try {
+                items = await searchViaPlaylist(humanQuery);
+            } catch (e) {
+                console.log("Busca por playlist falhou, seguindo para a busca direta.", e);
+            }
+        }
+
+        // PLANO B: busca direta de gênero + humor
+        if (items.length === 0 && qExact) {
             items = await searchSpotify(qExact);
         }
 
-        // plano b: busca de apenas o genero
+        // PLANO C: só o gênero
         if (items.length === 0 && genres.length > 0) {
-            console.log("Plano A falhou. Tentando o Plano B (Apenas Gênero)...");
-            let qGenreOnly = searchType === "album" ? genres[0] : `genre:"${genres[0]}"`;
+            console.log("Tentando apenas o gênero...");
+            const qGenreOnly = searchType === "album" ? genres[0] : `genre:"${genres[0]}"`;
             items = await searchSpotify(qGenreOnly);
         }
 
-        // plano c: manda um curinga
+        // PLANO D: curinga
         if (items.length === 0) {
-            console.log("Plano B falhou. Acionando Plano C (Gênero Curinga)...");
+            console.log("Acionando gênero curinga...");
             const fallback = ["pop", "rock", "indie", "jazz", "mpb"];
-            const random = fallback[Math.floor(Math.random() * fallback.length)];
-            let qFallback = searchType === "album" ? random : `genre:"${random}"`;
+            const random = pickRandom(fallback);
+            const qFallback = searchType === "album" ? random : `genre:"${random}"`;
             items = await searchSpotify(qFallback);
         }
 
-        return items;
+        if (items.length === 0) return [];
+
+        // Sorteia o resultado e o coloca no início (a tela exibe items[0])
+        const chosen = pickRandom(items);
+        return [chosen, ...items.filter((it: any) => it !== chosen)];
 
     } catch (error) {
         console.error("Erro ao buscar recomendações de músicas:", error);
