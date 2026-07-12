@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
+
+.InterestContainer {
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin-top: 90px;
+
+}
+
+.InterestContent {
+    justify-content: center;
+    align-items: center;
+}
+
+.InterestContent h2 {
+    display: flex;
+    font-weight: 400;
+    font-family: 'Alexandria';
+    font-size: 22px;
+    color: #FFFFFF;
+    margin-bottom: 15px;
+    margin-left: 15%;
+}
+
+.InterestContent p {
+    display: flex;
+    width: 70%;
+    font-weight: 200;
+    font-family: 'Alexandria';
+    margin-left: 15%;
+    font-size: 16px;
+    color: #FFFFFF;
+    margin-bottom: 15px;
+    text-align: left;
+    align-items: center;
+    justify-content: center;
+}
+
+.InterestContent button {
+    display: flex;
+    margin-left: 15%;
+    font-weight: 300;
+    font-family: 'Afacad';
+    font-size: 15px;
+    color: #FFFFFF;
+    margin-bottom: 15px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 170px;
+    height: 40px;
+    padding: 0;
+
+    cursor: pointer;
+    animation: fadeIn 1.5s ease-in;
+    transition: all 0.3s ease;
+
+    background-color: transparent;
+    border: 2.8px solid #E5E5E5;
+    border-radius: 25px;
+
+}
+
+.InterestContent button:hover {
+    border-color: #501A5E;
+    color: #501A5E;
+}
+
+@media (max-width: 768px) {
+    .InterestContainer {
+        display: flex;
+        width: 100%;
+        height: auto;
+        margin-top: 40px;
+    }
+
+    .InterestContent h2 {
+        display: flex;
+        font-weight: 400;
+        font-family: 'Alexandria';
+        font-size: 16px;
+        color: #FFFFFF;
+        margin-bottom: 15px;
+        margin-left: 15%;
+    }
+
+    .InterestContent p {
+        display: flex;
+        width: 80%;
+        font-weight: 200;
+        font-family: 'Alexandria';
+        margin-left: 15%;
+        font-size: 13px;
+        color: #FFFFFF;
+        margin-bottom: 15px;
+        text-align: left;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .InterestContent button {
+        display: flex;
+        margin-left: 15%;
+        font-weight: 300;
+        font-family: 'Afacad';
+        font-size: 13px;
+        color: #FFFFFF;
+        margin-bottom: 15px;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        width: 120px;
+        height: 40px;
+        padding: 0;
+
+        cursor: pointer;
+        animation: fadeIn 1.5s ease-in;
+        transition: all 0.3s ease;
+
+        background-color: transparent;
+        border: 2.8px solid #E5E5E5;
+        border-radius: 25px;
+
+    }
+
+}

@@ -204,22 +204,13 @@ function Body() {
                                 <input type="checkbox" value="Sertanejo" checked={formData.GenreType.includes("Sertanejo")} onChange={handleGenreChange} /> Sertanejo
                             </label>
                             <label>
-                                <input type="checkbox" value="K-pop" checked={formData.GenreType.includes("K-pop")} onChange={handleGenreChange} /> K-pop
-                            </label>
-                            <label>
                                 <input type="checkbox" value="Pop" checked={formData.GenreType.includes("Pop")} onChange={handleGenreChange} /> Pop
                             </label>
                             <label>
                                 <input type="checkbox" value="Eletronica" checked={formData.GenreType.includes("Eletronica")} onChange={handleGenreChange} /> Eletrônica
                             </label>
                             <label>
-                                <input type="checkbox" value="R&B" checked={formData.GenreType.includes("R&B")} onChange={handleGenreChange} /> R&B
-                            </label>
-                            <label>
                                 <input type="checkbox" value="Rock" checked={formData.GenreType.includes("Rock")} onChange={handleGenreChange} /> Rock
-                            </label>
-                            <label>
-                                <input type="checkbox" value="Funk" checked={formData.GenreType.includes("Funk")} onChange={handleGenreChange} /> Funk
                             </label>
                             <label>
                                 <input type="checkbox" value="Pagode" checked={formData.GenreType.includes("Pagode")} onChange={handleGenreChange} /> Pagode

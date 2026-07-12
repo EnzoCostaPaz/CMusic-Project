@@ -4,12 +4,13 @@
 
 /* animação do elemento aparecendo pela esquerda*/
 
-@keyframes animacaoEsquerda{
-    from{
+@keyframes animacaoEsquerda {
+    from {
         transform: translateX(-100%);
         opacity: 0;
     }
-    to{
+
+    to {
         opacity: 1;
         transform: translateX(0);
     }
@@ -17,19 +18,19 @@
 
 /* animação do elemento aparecendo pela direita*/
 
-@keyframes animacaoDireita{
-    from{
-        /* 100% (e não 200%) para não jogar a imagem tão longe pra fora da tela */
+@keyframes animacaoDireita {
+    from {
         transform: translateX(100%);
         opacity: 0;
     }
-    to{
+
+    to {
         opacity: 1;
         transform: translateX(0);
     }
 }
 
-.SectionAbout{
+.SectionAbout {
     margin-top: 150px;
     width: 95%;
     height: auto;
@@ -47,22 +48,22 @@
 
 .ContentLeft {
     display: flex;
-    flex-direction: column; 
-    gap: 20px; 
-    max-width: 50%; 
+    flex-direction: column;
+    gap: 20px;
+    max-width: 50%;
 }
 
-.Title{
+.Title {
     color: #FFFFFF;
     margin: 0;
     font-size: 30px;
     font-family: 'Alexandria';
     font-weight: 400;
-        animation: animacaoEsquerda 0.9s ease-in-out;
+    animation: animacaoEsquerda 0.9s ease-in-out;
 
 }
 
-.Leftside{
+.Leftside {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -77,8 +78,9 @@
 
     animation: animacaoEsquerda 0.9s ease-in-out;
 }
-.Leftside p{
-   color: #FFFFFF;
+
+.Leftside p {
+    color: #FFFFFF;
     font-weight: 200;
     font-family: 'Alexandria';
     font-size: 22px;
@@ -86,11 +88,12 @@
     margin: 0;
 }
 
-.ImgAsset{
+.ImgAsset {
 
-    width: 100%;
-    max-width:400px;
+    width: 80%;
+    max-width: 270px;
     height: auto;
+    margin-left:15px;
 
     object-fit: contain;
 
@@ -103,7 +106,7 @@
         margin-top: 60px;
         padding: 0 22px;
         gap: 20px;
-        text-align: left;      
+        text-align: left;
         align-items: flex-start;
     }
 
@@ -118,7 +121,8 @@
     }
 
     .Leftside {
-        max-width: 100%;           /* o card ocupa a largura toda */
+        max-width: 100%;
+        /* o card ocupa a largura toda */
         padding: 22px;
     }
 

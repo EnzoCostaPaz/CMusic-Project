@@ -19,7 +19,7 @@
     animation: spin 1s linear infinite;
 }
 
-.phrase{
+.phrase {
     font-family: 'Source Code Pro';
     color: #FFFFFF;
     font-size: 15px;
@@ -29,8 +29,13 @@
 
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Container mestre ocupando o espaço e centralizando tudo */
@@ -45,6 +50,30 @@
     box-sizing: border-box;
 }
 
+.CardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 50px;
+}
+
+
+.ResultGrid {
+    width: 220px;
+    background-color: #2D1E36;
+    border-radius: 25px;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    margin-bottom: 40px;
+}
+
 /* Frase do topo */
 .phrase {
     font-family: 'Source Code Pro', monospace;
@@ -57,19 +86,6 @@
     line-height: 1.4;
 }
 
-.ResultGrid {
-    background-color: #2D1E36;
-    border-radius: 25px;
-    padding: 35px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 420px;
-    height: auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    margin-bottom: 40px;
-}
-
 .PhotoAlbum {
     display: flex;
     justify-content: center;
@@ -79,8 +95,8 @@
 }
 
 .Image {
-    width: 220px;
-    height: 220px;
+    width: 180px;
+    height: 180px;
     object-fit: cover;
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -90,7 +106,7 @@
 .NameRecomendatin h2 {
     font-family: 'Afacad', sans-serif;
     color: #FFFFFF;
-    font-size: 26px;
+    font-size: 18px;
     font-weight: 700;
     font-style: italic;
     margin: 0 0 5px 0;
@@ -100,7 +116,7 @@
 .Authors p {
     font-family: 'Alexandria', sans-serif;
     color: #b3b3b3;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 300;
     margin: 0 0 25px 0;
     text-align: center;
@@ -157,11 +173,6 @@
     background-color: #3E0866;
 }
 
-@media (min-width: 1024px) {
-  .ResultContainer{
-    height: 90vh;
-  }
-}
 
 /* celulares */
 @media (max-width: 850px) {
@@ -171,9 +182,9 @@
     }
 
     .ResultGrid {
-        width: 100%; 
-        max-width: 350px; 
-        padding: 25px 20px; 
+        width: 100%;
+        max-width: 350px;
+        padding: 25px 20px;
     }
 
     .Image {
@@ -197,7 +208,7 @@
         flex-direction: column;
         width: 100%;
         max-width: 350px;
-        gap: 15px; 
+        gap: 15px;
     }
 
     .TryAgainButton,
