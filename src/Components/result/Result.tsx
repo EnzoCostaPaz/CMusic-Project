@@ -2,22 +2,40 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './Result.module.css';
 import { motion } from 'framer-motion';
+import { getSpotifyToken } from '../../service/spotifyAuth';
+import { getRecommendations } from '../../service/spotifyService';
 
 function Result() {
     const navigate = useNavigate();
     const location = useLocation();
 
     const [loading, setLoading] = useState(true);
+    const [resultData, setResultData] = useState<any[] | null>(null);
 
-    const resultData = location.state?.tracks;
+    const formData = location.state?.formData;
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 3000);
+        let isCurrent = true;
 
-        return () => clearTimeout(timer); 
-    }, []);
+        const buscarRecomendacoes = async () => {
+            if (!formData) {
+                if (isCurrent) setLoading(false);
+                return;
+            }
+
+            const token = await getSpotifyToken();
+            const tracks = token ? await getRecommendations(token, formData) : null;
+
+            if (isCurrent) {
+                setResultData(tracks);
+                setLoading(false);
+            }
+        };
+
+        buscarRecomendacoes();
+
+        return () => { isCurrent = false; };
+    }, [formData]);
 
     if (loading) {
         return(
