@@ -87,7 +87,6 @@
         margin-top: 50px;
         height: auto;
         min-height: 0;
-        /* mesma proporção da imagem do celular: a cena aparece inteira, sem corte */
         aspect-ratio: 412 / 216;
 
         /* troca o fundo desktop pela versão feita para celular */
@@ -112,7 +111,6 @@
         margin-bottom: 0;
     }
 
-    /* Os balões ocupam o espaço restante e encolhem para caber sem estourar */
     .ImageAsset {
         flex: 1;
         min-height: 0;

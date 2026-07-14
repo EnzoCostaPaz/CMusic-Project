@@ -31,7 +31,6 @@ function Footer() {
                             <div className={styles.coluna}>
                                 <p className={styles.titulo}>Páginas</p>
                                 <ul className={styles.lista}>
-                                    <li><button>Sobre Nós</button></li>
                                     <li><button>Home</button></li>
                                     <li><button onClick={() => navigate('/formulario')}>Formulario</button></li>
                                 </ul>
