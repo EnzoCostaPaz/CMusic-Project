@@ -184,7 +184,7 @@ function Body() {
 
                         <div className={styles.CheckboxGrid}>
                             <label>
-                                <input type="checkbox" value="Hip-Hop" checked={formData.GenreType.includes("Hip-Hop")} onChange={handleGenreChange} /> Hip-Hop/Rap
+                                <input type="checkbox" value="Hip-Hop" checked={formData.GenreType.includes("Hip-Hop")} onChange={handleGenreChange} /> Hip-Hop
                             </label>
                              <label>
                                 <input type="checkbox" value="Rap" checked={formData.GenreType.includes("Rap")} onChange={handleGenreChange} /> Rap
