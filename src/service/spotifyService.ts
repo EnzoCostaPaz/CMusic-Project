@@ -7,9 +7,6 @@ import axios from 'axios';
 type GenreProfile = { query: string; match: string[] };
 
 const genreProfiles: Record<string, GenreProfile> = {
-    "Hip-Hop": { query: "hip hop", match: ["hip hop", "rap", "trap"] },
-    "Sertanejo": { query: "sertanejo", match: ["sertanejo", "arrocha"] },
-
     // "K-pop": { query: "k-pop", match: ["k-pop", "korean"] },
     // "R&B": { query: "r&b", match: ["r&b", "rnb", "soul"] },
     // "Funk": { query: "funk", match: ["funk"] },
@@ -17,6 +14,10 @@ const genreProfiles: Record<string, GenreProfile> = {
     //opções retiradas por ora pois esta apresentando resultados irrelevantes ou não relacionados ao gênero;
     //corrigir isso mais tarde
 
+    "Hip-Hop": { query: "hip hop", match: ["hip hop"] },
+    "Rap": {query: "rap", match:["rap"]},
+    "Trap": {query: "trap", match:["trap"]},
+    "Sertanejo": { query: "sertanejo", match: ["sertanejo", "arrocha"] },
     "Pop": { query: "pop", match: ["pop"] },
     "Eletronica": { query: "electronic", match: ["electronic", "edm", "house", "techno", "electro", "trance", "dance", "dubstep", "drum and bass", "big room"] },
    
@@ -181,7 +182,6 @@ export const getRecommendations = async (token: string, formData: any) => {
                     // 403 = playlist bloqueada pelo modo de desenvolvimento
                     const status = error?.response?.status;
                     if (status === 403) playlistBlockCount++;
-                    console.log(`Playlist indisponível (${status ?? "?"}), tentando a próxima...`);
                     if (playlistBlockCount >= PLAYLIST_BLOCK_LIMIT) break;
                     continue;
                 }
@@ -344,7 +344,6 @@ export const getRecommendations = async (token: string, formData: any) => {
 
         // PLANO D: curinga — qualquer gênero conhecido, sem humor/estilo
         if (items.length === 0) {
-            console.log("Acionando gênero curinga...");
             items = await buscarPorGenero(pickRandom(Object.values(genreProfiles)), true);
         }
 
