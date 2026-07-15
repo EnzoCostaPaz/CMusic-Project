@@ -52,4 +52,5 @@ Você pode testar o projeto rodando ao vivo através deste link:
 
 ### status📊
 
-![Static Badge](https://img.shields.io/badge/Em%20andamento%20-%20black?style=for-the-badge&logoColor=white&logoSize=auto&label=status&labelColor=purple&color=white)
+![Static Badge](https://img.shields.io/badge/Completo%20-%20white?style=for-the-badge&logoColor=black&label=Status%20&labelColor=purple%20&color=white)
+
