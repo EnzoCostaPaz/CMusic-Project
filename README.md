@@ -1,6 +1,8 @@
 # CMusic 🎵
 > O lugar para sair do tédio de ouvir as mesmas músicas.
 
+> Atenção⚠️ essa branch é especifica para testes do site antes de ir para produção, caso queira testar o site mais atualizado, volte para a main
+
 ## Sobre 📖
 O CMusic é um sistema web desenvolvido pensando naqueles momentos em que você está cansado de ouvir as mesmas músicas e precisa de novos ares.
 
@@ -19,12 +21,6 @@ Após isso, o algoritmo cruza os dados e a API busca uma recomendação
 ![Static Badge](https://img.shields.io/badge/CSS%20Modules%20-%20black?style=for-the-badge&logo=css&logoColor=white&logoSize=auto&labelColor=%23663399&color=white)
 ![Static Badge](https://img.shields.io/badge/Vercel%20-%20black?style=for-the-badge&logo=vercel&logoColor=white&logoSize=auto&labelColor=%23000000&color=white)
 ![Static Badge](https://img.shields.io/badge/Spotify%20Web%20API%20-%20black?style=for-the-badge&logo=spotify&logoColor=white&logoSize=auto&labelColor=%231ED760&color=white)
-
----
-
-## Acesso Online 🌍
-Você pode testar o projeto rodando ao vivo através deste link:  
-[**Acessar CMusic na Vercel**](https://c-music-project-three.vercel.app)
 
 ---
 
