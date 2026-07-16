@@ -10,9 +10,7 @@ const genreProfiles: Record<string, GenreProfile> = {
     // "K-pop": { query: "k-pop", match: ["k-pop", "korean"] },
     // "R&B": { query: "r&b", match: ["r&b", "rnb", "soul"] },
     // "Funk": { query: "funk", match: ["funk"] },
-
     //opções retiradas por ora pois esta apresentando resultados irrelevantes ou não relacionados ao gênero;
-    //corrigir isso mais tarde
 
     "Hip-Hop": { query: "hip hop", match: ["hip hop"] },
     "Rap": {query: "rap", match:["rap"]},
@@ -46,7 +44,7 @@ const styleMap: Record<string, string> = {
     "Indie": "indie",
     "Mainstream": "mainstream",
     "Experimental": "experimental",
-    "Classico": "classic", // Pega "classic rock", "classic pop", etc.
+    "Classico": "classic", // Pega "classic rock", "classic pop" etc.
     "Alternativo": "alternative",
 };
 
@@ -65,7 +63,6 @@ const pickRandom = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length
 const shuffle = <T>(arr: T[]): T[] => [...arr].sort(() => Math.random() - 0.5);
 
 // Normaliza um texto para comparação: minúsculo, sem acento e sem símbolos.
-// Assim "K-Pop Girl Group" vira "kpopgirlgroup" e casa com "kpop".
 const norm = (text: string) =>
     (text ?? "")
         .toLowerCase()
@@ -81,8 +78,7 @@ const matchesProfile = (artistGenres: string[], profile: GenreProfile) =>
 // próximas tentativas (zera ao recarregar a página)
 const shownIds = new Set<string>();
 
-// O modo de desenvolvimento do Spotify bloqueia (403) as faixas de várias
-// playlists.
+// O modo de desenvolvimento do Spotify bloqueia (403) as faixas de várias playlists.
 let playlistBlockCount = 0;
 const PLAYLIST_BLOCK_LIMIT = 3;
 
@@ -132,9 +128,6 @@ export const getRecommendations = async (token: string, formData: any) => {
         };
 
         // Busca direta de faixas pelo filtro de gênero do Spotify.
-        // Sem offset aleatório: ele "cavava fundo" demais no ranking e trazia
-        // resultados sem relação. E sem "limit": a API deste app devolve 400
-        // "Invalid limit" quando o parâmetro é enviado (fica o padrão, 20).
         const searchTracks = async (profile: GenreProfile, moodWord: string | null) => {
             const q = `genre:"${profile.query}"` + (moodWord ? ` ${moodWord}` : "");
             const data = await apiGet(spotifySearchURL, { q, type: "track", market: "BR" });
@@ -144,25 +137,17 @@ export const getRecommendations = async (token: string, formData: any) => {
             const valid = await filterTracksByProfile(found, profile);
             if (valid.length > 0) return valid;
 
-            // Com humor no texto a chance de lixo é alta: melhor devolver vazio
-            // e deixar o plano seguinte (só gênero) assumir. Sem humor, o
-            // resultado cru do filtro de gênero é um último recurso aceitável.
             return moodWord ? [] : found;
         };
 
-        // Busca playlists sobre o gênero (+ humor) e usa as faixas delas.
-        // Só aceita playlists que citam o gênero no nome/descrição — é isso
-        // que evita cair em playlists aleatórias.
         const searchViaPlaylist = async (profile: GenreProfile, moodWord: string) => {
-            // rota desativada nesta sessão (muitos 403 do Spotify)? nem tenta
+            // rota desativada nesta sessão
             if (playlistBlockCount >= PLAYLIST_BLOCK_LIMIT) return [];
 
             const q = `${profile.query} ${moodWord}`;
-            // sem "limit" aqui: o padrão (20) evita o 400 "Invalid limit"
             const data = await apiGet(spotifySearchURL, { q, type: "playlist", market: "BR" });
 
-            // o Spotify às vezes devolve itens nulos na lista de playlists
-            // (o ": any[]" fixa o tipo — sem ele o TS trata cada item como "unknown")
+            // any[]" para fixar o tipo 
             let playlists: any[] = (data?.playlists?.items ?? []).filter(Boolean);
             playlists = playlists.filter((p: any) =>
                 profile.match.some((token) =>
@@ -199,8 +184,7 @@ export const getRecommendations = async (token: string, formData: any) => {
             return [];
         };
 
-        // Busca artistas pelo filtro de gênero e valida cada um pelos
-        // gêneros cadastrados no próprio perfil do artista
+        // Busca artistas pelo filtro de gênero e valida cada um pelos gêneros cadastrados no próprio perfil do artista
         const searchArtists = async (profile: GenreProfile): Promise<any[]> => {
             const data = await apiGet(spotifySearchURL, {
                 q: `genre:"${profile.query}"`, type: "artist", market: "BR"
@@ -232,7 +216,6 @@ export const getRecommendations = async (token: string, formData: any) => {
             return combina.length > 0 ? combina : artists;
         };
 
-        // Remove álbuns repetidos (mesmo nome + mesmo artista, ex.: versões deluxe)
         const dedupeAlbums = (albums: any[]) => {
             const seen = new Set<string>();
             return albums.filter((al: any) => {
@@ -244,16 +227,12 @@ export const getRecommendations = async (token: string, formData: any) => {
             });
         };
 
-        // Converte faixas (ex.: vindas de playlist) nos álbuns delas
         const albumsFromTracks = (tracks: any[]) => {
             const albums = tracks.map((t: any) => t?.album).filter((al: any) => al && al.id);
             const fullAlbums = albums.filter((al: any) => al.album_type === "album");
             return dedupeAlbums(fullAlbums.length > 0 ? fullAlbums : albums);
         };
 
-        // Pega os álbuns direto da discografia de artistas do gênero — bem mais
-        // preciso do que procurar o nome do gênero no título do álbum (a busca
-        // de álbum por texto era o que trazia resultados desconexos)
         const albumsFromArtists = async (profile: GenreProfile) => {
             const artists = await searchArtists(profile);
             const albums: any[] = [];
@@ -266,13 +245,12 @@ export const getRecommendations = async (token: string, formData: any) => {
                 albums.push(...(data?.items ?? []).filter(Boolean));
             }
 
-            // prioriza álbuns "de verdade"; se o artista só tiver singles/EPs, vale o que tiver
             const fullAlbums = albums.filter((al: any) => al.album_type === "album");
             return dedupeAlbums(fullAlbums.length > 0 ? fullAlbums : albums);
         };
 
 
-        // Montagem dos parâmetros desta tentativa -----
+        // Montagem dos parâmetros desta tentativa 
         const selectedGenres: string[] = (formData.GenreType || [])
             .filter((g: string) => g !== "Surpresa");
 
@@ -282,7 +260,6 @@ export const getRecommendations = async (token: string, formData: any) => {
             (name) => genreProfiles[name] ?? { query: name.toLowerCase(), match: [name.toLowerCase()] }
         );
 
-        // humor (faixa/álbum) ou estilo (artista) — sorteia um entre os marcados
         let mood: string | null = null;
         let style: string | null = null;
 
@@ -349,18 +326,15 @@ export const getRecommendations = async (token: string, formData: any) => {
 
         if (items.length === 0) return [];
 
-        // Não repete recomendações já mostradas nesta sessão. Se todas as
-        // opções encontradas já tiverem aparecido, libera a repetição em vez  de voltar de mãos vazias
         const fresh = items.filter((it: any) => it?.id && !shownIds.has(it.id));
         const pool = fresh.length > 0 ? fresh : items;
 
-        // Sorteia o resultado e o coloca no início (a tela exibe items[0])
+        // Sorteia o resultado e o coloca no início 
         const chosen = pickRandom(pool);
         if (chosen?.id) shownIds.add(chosen.id);
         return [chosen, ...items.filter((it: any) => it !== chosen)];
 
     } catch (error: any) {
-        console.error("Erro ao buscar recomendações de músicas:", error?.response?.data ?? error);
         return null;
     }
 };
